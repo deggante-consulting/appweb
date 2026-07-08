@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useState } from "react";
 
 const requestTypes = [
   "employeur",
@@ -27,13 +27,12 @@ type FormStatus = "idle" | "sending" | "success" | "error";
 export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [consentAccepted, setConsentAccepted] = useState(false);
 
-  const disabled = status === "sending";
-  const fieldClass = useMemo(
-    () =>
-      "min-h-11 rounded-[var(--radius-field)] border-[1.5px] border-[var(--border)] bg-white px-4 py-3 text-sm text-[var(--dark)] outline-none transition focus:border-[var(--accent)]",
-    [],
-  );
+  const sending = status === "sending";
+  const submitDisabled = sending || !consentAccepted;
+  const fieldClass = "dg-field";
+  const selectClass = "dg-field dg-select";
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -75,6 +74,7 @@ export function ContactForm() {
         body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
       });
       form.reset();
+      setConsentAccepted(false);
       setStatus("success");
     } catch {
       setStatus("error");
@@ -100,20 +100,20 @@ export function ContactForm() {
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field error={errors.firstName} label="Prénom" name="firstName" required>
-          <input className={fieldClass} id="firstName" maxLength={80} name="firstName" required type="text" />
+          <input className={fieldClass} id="firstName" maxLength={80} name="firstName" placeholder="Votre prénom" required type="text" />
         </Field>
         <Field error={errors.lastName} label="Nom" name="lastName" required>
-          <input className={fieldClass} id="lastName" maxLength={80} name="lastName" required type="text" />
+          <input className={fieldClass} id="lastName" maxLength={80} name="lastName" placeholder="Votre nom" required type="text" />
         </Field>
         <Field error={errors.email} label="Email" name="email" required>
-          <input className={fieldClass} id="email" maxLength={160} name="email" required type="email" />
+          <input className={fieldClass} id="email" maxLength={160} name="email" placeholder="vous@exemple.fr" required type="email" />
         </Field>
         <Field label="Téléphone" name="phone">
-          <input className={fieldClass} id="phone" maxLength={40} name="phone" type="tel" />
+          <input className={fieldClass} id="phone" maxLength={40} name="phone" placeholder="+590 ..." type="tel" />
         </Field>
       </div>
       <Field error={errors.requestType} label="Type de demande" name="requestType" required>
-        <select className={fieldClass} defaultValue="" id="requestType" name="requestType" required>
+        <select className={selectClass} defaultValue="" id="requestType" name="requestType" required>
           <option disabled value="">
             Sélectionner
           </option>
@@ -126,13 +126,13 @@ export function ContactForm() {
       </Field>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Structure" name="organization">
-          <input className={fieldClass} id="organization" maxLength={120} name="organization" type="text" />
+          <input className={fieldClass} id="organization" maxLength={120} name="organization" placeholder="Nom de votre structure" type="text" />
         </Field>
         <Field label="Fonction" name="role">
-          <input className={fieldClass} id="role" maxLength={120} name="role" type="text" />
+          <input className={fieldClass} id="role" maxLength={120} name="role" placeholder="Votre fonction" type="text" />
         </Field>
         <Field label="Service recherché" name="service">
-          <select className={fieldClass} id="service" name="service">
+          <select className={selectClass} id="service" name="service">
             {serviceOptions.map((service) => (
               <option key={service} value={service}>
                 {service}
@@ -141,7 +141,7 @@ export function ContactForm() {
           </select>
         </Field>
         <Field label="Préférence de contact" name="contactPreference">
-          <select className={fieldClass} id="contactPreference" name="contactPreference">
+          <select className={selectClass} id="contactPreference" name="contactPreference">
             {contactPreferences.map((preference) => (
               <option key={preference} value={preference}>
                 {preference}
@@ -150,22 +150,25 @@ export function ContactForm() {
           </select>
         </Field>
       </div>
-      <Field error={errors.message} label="Message" name="message" required>
+      <Field error={errors.message} label="Votre situation, en quelques lignes" name="message" required>
         <textarea
           className={`${fieldClass} min-h-36 resize-y`}
           id="message"
           maxLength={1800}
           name="message"
+          placeholder="Décrivez le contexte général. Inutile de transmettre des documents ou des informations sensibles à ce stade."
           required
         />
       </Field>
-      <div className="rounded-[var(--radius-panel)] border border-[var(--border)] bg-[var(--background)] p-4 text-sm leading-7 text-[var(--text-soft)]">
-        Ne transmettez pas immédiatement d'informations médicales détaillées, de
-        documents judiciaires, de données personnelles concernant des tiers ou
-        d'informations confidentielles sensibles.
-      </div>
-      <label className="flex gap-3 text-sm leading-6 text-[var(--text-soft)]">
-        <input className="mt-1 size-5 accent-[var(--accent-dark)]" name="consent" required type="checkbox" />
+      <label className="flex cursor-pointer gap-3 text-sm leading-6 text-[var(--text-soft)]">
+        <input
+          checked={consentAccepted}
+          className="mt-1 size-5 cursor-pointer accent-[var(--accent-dark)]"
+          name="consent"
+          onChange={(event) => setConsentAccepted(event.currentTarget.checked)}
+          required
+          type="checkbox"
+        />
         <span>
           J'accepte que mes données soient utilisées pour traiter ma demande,
           conformément à la politique de confidentialité.
@@ -175,16 +178,17 @@ export function ContactForm() {
         </span>
       </label>
       <div className="flex flex-col gap-4 border-t border-[var(--line)] pt-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm leading-6 text-[var(--text-soft)]">
-          Le formulaire ne réserve pas automatiquement un rendez-vous. DÉGGANTE
-          Consulting étudie la demande avant de recontacter la personne.
+        <p className="max-w-md text-sm leading-6 text-[var(--muted-soft)]">
+          Merci de ne pas transmettre d'informations médicales, judiciaires ou
+          concernant d'autres personnes à ce stade. Le formulaire ne réserve pas
+          automatiquement un rendez-vous.
         </p>
         <button
-          className="min-h-12 rounded-full bg-[var(--accent-dark)] px-6 text-sm font-extrabold text-white transition hover:bg-[var(--accent-deep)] disabled:cursor-not-allowed disabled:opacity-60"
-          disabled={disabled}
+          className="inline-flex dg-cta dg-cta-dark min-h-12 shrink-0 px-8"
+          disabled={submitDisabled}
           type="submit"
         >
-          {disabled ? "Envoi en cours..." : "Envoyer ma demande"}
+          {sending ? "Envoi en cours..." : "Envoyer ma demande"}
         </button>
       </div>
       <div aria-live="polite">

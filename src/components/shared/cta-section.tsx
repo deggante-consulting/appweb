@@ -18,7 +18,9 @@ export function CTASection({
         </h2>
         <p className="max-w-2xl text-base leading-8 text-neutral-300">{description}</p>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href="/contact">Demander un premier échange</ButtonLink>
+          <ButtonLink arrow href="/contact">
+            Demander un premier échange
+          </ButtonLink>
           <ButtonLink href={site.phoneHref} variant="light">
             {site.phone}
           </ButtonLink>

@@ -1,29 +1,72 @@
 import Image from "next/image";
 
-import { DecorativeCurves } from "@/components/patterns/decorative-curves";
 import { ButtonLink } from "@/components/shared/button-link";
-import { CTASection } from "@/components/shared/cta-section";
-import { IntroBlock } from "@/components/shared/intro-block";
-import { SectionHeading } from "@/components/shared/section-heading";
-import { employeeLimits, employeeSituations, images, site } from "@/content/site";
+import { Eyebrow } from "@/components/shared/eyebrow";
+import { images, site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata("/accompagnement-salaries");
 
+const situations = [
+  {
+    title: "Préparer un échange ou un entretien",
+    text: "Clarifier ce que vous voulez dire, anticiper les réactions, structurer vos arguments.",
+  },
+  {
+    title: "Situation conflictuelle",
+    text: "Être accompagné pour comprendre le conflit et chercher une issue.",
+  },
+  {
+    title: "Rupture conventionnelle",
+    text: "Comprendre la démarche et préparer les échanges avec l'employeur.",
+  },
+  {
+    title: "Licenciement pour inaptitude ou économique",
+    text: "Y voir clair sur votre situation et les étapes qui vous attendent.",
+  },
+  {
+    title: "Arrêt maladie prolongé, accident du travail",
+    text: "Préparer la reprise et le dialogue avec l'employeur.",
+  },
+  {
+    title: "Reprise du dialogue, nouveau projet",
+    text: "Renouer les échanges ou être orienté vers un autre projet professionnel.",
+  },
+];
+
+const steps = [
+  {
+    title: "Écoute et analyse de votre situation",
+    text: "Un temps pour poser les faits, sans jugement, en toute confidentialité.",
+  },
+  {
+    title: "Préparation de vos échanges",
+    text: "Entretien, courrier, réunion : vous arrivez préparé.",
+  },
+  {
+    title: "Accompagnement dans la durée",
+    text: "Un suivi tant que la situation le nécessite, ou une orientation vers le bon professionnel.",
+  },
+];
+
 export default function EmployeeSupportPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-[var(--soft-band)] py-16 sm:py-20">
-        <DecorativeCurves className="left-auto right-0 top-0 h-72 w-1/2 opacity-55" />
-        <div className="dg-container relative grid gap-10 lg:grid-cols-[1fr_430px] lg:items-center">
+      <section className="bg-[var(--soft-band)] py-[68px]">
+        <div className="dg-container grid gap-12 lg:grid-cols-[1fr_380px] lg:items-center">
           <div className="max-w-3xl dg-fade-up">
-            <IntroBlock
-              description="Un accompagnement pour clarifier une situation professionnelle difficile, préparer un échange et reprendre le dialogue lorsque c'est possible."
-              eyebrow="Accompagnement des salariés"
-              title="Préparer, comprendre, reprendre la parole"
-            />
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact" variant="dark">
+            <Eyebrow>Accompagnement des salariés</Eyebrow>
+            <h1 className="mt-4 max-w-4xl text-[46px] font-extrabold leading-[1.12] tracking-[-0.015em] max-md:text-4xl">
+              Traverser une situation professionnelle difficile, sans rester seul
+            </h1>
+            <p className="mt-4 max-w-3xl text-[17px] leading-[1.65] text-[var(--text-soft)]">
+              Entretien à préparer, conflit, rupture conventionnelle,
+              licenciement, arrêt maladie prolongé : DÉGGANTE Consulting vous
+              aide à comprendre votre situation, préparer vos échanges et
+              reprendre le dialogue avec votre employeur.
+            </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink arrow href="/contact" variant="dark">
                 Décrire votre situation
               </ButtonLink>
               <ButtonLink href={site.phoneHref} variant="secondary">
@@ -32,8 +75,8 @@ export default function EmployeeSupportPage() {
             </div>
           </div>
           <Image
-            alt="Échange professionnel dans un bureau"
-            className="h-[360px] w-full rounded-[var(--radius-card)] object-cover"
+            alt="Écoute individuelle dans un cadre professionnel"
+            className="h-[340px] w-full rounded-[var(--radius-card)] object-cover"
             height={534}
             src={images.dialogue}
             width={480}
@@ -41,58 +84,92 @@ export default function EmployeeSupportPage() {
         </div>
       </section>
 
-      <section className="dg-section bg-white">
-        <div className="dg-container grid gap-10 lg:grid-cols-[1fr_392px]">
+      <section className="bg-white py-[72px]">
+        <div className="dg-container">
+          <div className="max-w-3xl">
+            <Eyebrow>Situations accompagnées</Eyebrow>
+            <h2 className="mt-4 text-[32px] font-extrabold leading-tight tracking-[-0.01em]">
+              Dans quels cas nous solliciter
+            </h2>
+          </div>
+          <div className="mt-[30px] grid gap-[18px] md:grid-cols-2 lg:grid-cols-3">
+            {situations.map((situation) => (
+              <article
+                className="rounded-[var(--radius-small)] bg-[var(--background)] p-[22px]"
+                key={situation.title}
+              >
+                <h3 className="text-base font-extrabold text-[var(--dark)]">
+                  {situation.title}
+                </h3>
+                <p className="mt-2 text-sm leading-[1.6] text-[var(--text-soft)]">
+                  {situation.text}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[var(--background)] py-[72px]">
+        <div className="dg-container grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <SectionHeading
-              description="L'objectif n'est pas de produire un conseil juridique automatisé. Le travail consiste à clarifier la situation, préparer les échanges et orienter vers le bon interlocuteur si le dossier dépasse le cadre d'intervention."
-              eyebrow="Situations accompagnées"
-              title="Quand solliciter DÉGGANTE Consulting ?"
-            />
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">
-              {employeeSituations.map((situation) => (
-                <article className="rounded-[var(--radius-small)] border border-[var(--card-border)] bg-[var(--background)] p-5" key={situation}>
-                  <h2 className="text-base font-extrabold leading-7">{situation}</h2>
-                </article>
+            <h2 className="text-[28px] font-extrabold leading-tight tracking-[-0.01em]">
+              Comment se déroule l'accompagnement
+            </h2>
+            <div className="mt-6 grid gap-4">
+              {steps.map((step, index) => (
+                <div className="flex gap-4" key={step.title}>
+                  <span
+                    className={
+                      index === 0
+                        ? "flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent-dark)] text-sm font-extrabold text-white"
+                        : "flex size-9 shrink-0 items-center justify-center rounded-full border-2 border-[var(--accent)] bg-white text-sm font-extrabold text-[var(--accent-dark)]"
+                    }
+                  >
+                    {index + 1}
+                  </span>
+                  <div className="pt-1">
+                    <h3 className="font-extrabold">{step.title}</h3>
+                    <p className="mt-1 text-[14.5px] leading-[1.6] text-[var(--text-soft)]">
+                      {step.text}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
-          <aside className="rounded-[var(--radius-panel)] bg-[var(--soft)] p-7 lg:sticky lg:top-28 lg:h-fit">
-            <h2 className="text-lg font-extrabold">Ce que permet le premier échange</h2>
-            <ol className="mt-5 grid gap-4 text-sm leading-7 text-[var(--text-soft)]">
-              <li>1. Comprendre le contexte général.</li>
-              <li>2. Identifier les points à préparer.</li>
-              <li>3. Déterminer si l'accompagnement est adapté.</li>
-              <li>4. Orienter vers un professionnel compétent si nécessaire.</li>
-            </ol>
+          <aside className="rounded-[var(--radius-panel)] border border-[var(--card-border)] border-l-4 border-l-[var(--accent)] bg-white p-[30px]">
+            <h2 className="text-lg font-extrabold">Le cadre de l'intervention</h2>
+            <p className="mt-3 text-[15px] leading-[1.7] text-[var(--text-soft)]">
+              Cet accompagnement ne remplace pas un avocat, un syndicat, un
+              psychologue, la médecine du travail ou un professionnel de santé.
+            </p>
+            <p className="mt-3 text-[15px] leading-[1.7] text-[var(--text-soft)]">
+              L'intervention de DÉGGANTE Consulting s'arrête lorsque le dossier
+              nécessite une procédure judiciaire, ou relève d'un accompagnement
+              médical ou psychologique. Dans ce cas, nous vous orientons vers le
+              professionnel adapté.
+            </p>
           </aside>
         </div>
       </section>
-      <section className="bg-[var(--background)] py-16 sm:py-20">
-        <div className="dg-container grid gap-8 lg:grid-cols-2">
+
+      <section className="border-t border-[var(--line)] bg-white py-14">
+        <div className="dg-container flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <SectionHeading
-              eyebrow="Limites"
-              title="Un cadre clair, sans confusion de rôle"
-            />
-            <p className="mt-5 leading-8 text-[var(--text-soft)]">
-              Cet accompagnement ne remplace pas :
+            <h2 className="text-[26px] font-extrabold tracking-[-0.01em]">
+              Parlez-nous de votre situation
+            </h2>
+            <p className="mt-2 text-[15.5px] text-[var(--text-soft)]">
+              Premier échange confidentiel, sans transmettre de documents
+              médicaux ni de données sensibles à ce stade.
             </p>
           </div>
-          <ul className="grid gap-3">
-            {employeeLimits.map((limit) => (
-              <li className="flex gap-3 rounded-[var(--radius-small)] bg-white p-4 font-bold" key={limit}>
-                <span className="text-[var(--accent-dark)]">•</span>
-                {limit}
-              </li>
-            ))}
-          </ul>
+          <ButtonLink arrow href="/contact" variant="dark">
+            Décrire votre situation
+          </ButtonLink>
         </div>
       </section>
-      <CTASection
-        title="Décrivez votre situation sans transmettre de document sensible"
-        description="DÉGGANTE Consulting étudie la demande avant de proposer un échange ou une orientation adaptée."
-      />
     </>
   );
 }

@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
 
 import { Logo } from "@/components/shared/logo";
-import { navigation } from "@/content/site";
+import { navigation, site } from "@/content/site";
 
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const contactPage = pathname === "/contact";
 
   return (
     <header className="sticky top-0 z-50 border-b border-black/5 bg-white/95 backdrop-blur">
@@ -37,11 +37,19 @@ export function Header() {
           })}
         </nav>
         <Link
-          className="hidden min-h-11 items-center gap-2 rounded-full bg-[linear-gradient(135deg,#1E7A2E,#2E9E40)] px-5 text-sm font-extrabold text-white shadow-[0_6px_18px_rgba(30,122,46,0.22)] transition hover:shadow-[0_10px_24px_rgba(30,122,46,0.26)] lg:inline-flex"
-          href="/contact"
+          className={
+            contactPage
+              ? "dg-cta dg-cta-secondary hidden lg:inline-flex"
+              : "dg-cta dg-cta-dark hidden lg:inline-flex"
+          }
+          href={contactPage ? site.phoneHref : "/contact"}
         >
-          Demander un premier échange
-          <ArrowRight aria-hidden="true" size={16} strokeWidth={2.5} />
+          {contactPage ? site.phone : "Demander un premier échange"}
+          {contactPage ? null : (
+            <span aria-hidden="true" className="dg-cta-arrow">
+              →
+            </span>
+          )}
         </Link>
         <button
           aria-controls="menu-mobile"

@@ -16,15 +16,15 @@ export function Logo({ light = false }: LogoProps) {
         className="rounded-full"
         height={44}
         priority
-        src={images.logo}
+        src={light ? images.logoDark : images.logo}
         width={44}
       />
       <span className="flex flex-col leading-none">
         <span
           className={
             light
-              ? "text-lg font-extrabold text-[var(--accent)]"
-              : "text-lg font-extrabold text-[var(--accent-dark)]"
+              ? "text-[17px] font-extrabold text-[var(--accent)]"
+              : "text-xl font-extrabold text-[var(--accent-dark)]"
           }
         >
           DÉGGANTE
@@ -32,7 +32,7 @@ export function Logo({ light = false }: LogoProps) {
         <span
           className={
             light
-              ? "mt-1 text-sm font-semibold text-neutral-200"
+              ? "mt-1 text-[13px] font-semibold text-neutral-200"
               : "mt-1 text-sm font-semibold text-[var(--dark-soft)]"
           }
         >

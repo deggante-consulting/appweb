@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { ButtonLink } from "@/components/shared/button-link";
 import { CTASection } from "@/components/shared/cta-section";
 import { PageHero } from "@/components/shared/page-hero";
 import { SectionHeading } from "@/components/shared/section-heading";
@@ -68,12 +69,14 @@ export default function ServicesPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link
-                    className={dark ? "mt-2 inline-flex min-h-11 w-fit items-center rounded-full bg-[var(--accent)] px-6 text-sm font-extrabold text-[var(--dark)]" : "mt-2 inline-flex min-h-11 w-fit items-center rounded-full bg-[var(--accent-dark)] px-6 text-sm font-extrabold text-white"}
+                  <ButtonLink
+                    arrow
+                    className="mt-2 w-fit"
                     href="/contact"
+                    variant={dark ? "primary" : "dark"}
                   >
                     {service.cta}
-                  </Link>
+                  </ButtonLink>
                 </div>
                 {index % 2 ? null : <ServiceImage dark={dark} image={image} result={service.result} />}
               </div>

@@ -32,6 +32,7 @@ export const legalNavigation = [
 
 export const images = {
   logo: "/images/brand/logo-symbol.png",
+  logoDark: "/images/brand/logo-symbol-dark.png",
   motifCurves: "/images/brand/motif-curves.png",
   motifDark: "/images/brand/motif-dark.png",
   hero: "/images/photos/hero-consulting.png",

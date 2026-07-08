@@ -84,8 +84,13 @@ export default function Home() {
               </span>
             ))}
           </div>
-          <ButtonLink className="lg:ml-auto" href="/accompagnement-salaries" variant="secondary">
-            Vous êtes salarié ?
+          <ButtonLink
+            arrow
+            className="text-[15px] lg:ml-auto"
+            href="/accompagnement-salaries"
+            variant="text"
+          >
+            Salarié ? Un accompagnement dédié
           </ButtonLink>
         </div>
       </section>
@@ -98,7 +103,7 @@ export default function Home() {
               eyebrow="Services"
               title="Quatre domaines d'intervention"
             />
-            <ButtonLink href="/services" variant="secondary">
+            <ButtonLink arrow href="/services" variant="secondary">
               Toutes les prestations
             </ButtonLink>
           </div>
@@ -217,7 +222,7 @@ export default function Home() {
               ni un syndicat, ni un professionnel de santé.
             </p>
           </div>
-          <ButtonLink href="/accompagnement-salaries" variant="secondary">
+          <ButtonLink arrow href="/accompagnement-salaries" variant="secondary">
             Découvrir l'accompagnement
           </ButtonLink>
         </div>
