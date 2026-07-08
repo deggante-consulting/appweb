@@ -5,7 +5,7 @@
   --foreground: #0d0d0d;
   --text-soft: #4a4a45;
   --muted: #55554f;
-  --muted-soft: #85857c;
+  --muted-soft: #66665f;
   --surface: #ffffff;
   --soft: #eaf7ec;
   --soft-band: #eef7ef;
@@ -94,7 +94,7 @@ img {
 }
 
 .dg-section {
-  padding-block: clamp(4rem, 7vw, 5.25rem);
+  padding-block: clamp(3rem, 7vw, 5.25rem);
 }
 
 .dg-card {
@@ -105,13 +105,13 @@ img {
 }
 
 .dg-field {
-  min-height: 44px;
+  min-height: 48px;
   border-radius: var(--radius-field);
   border: 1.5px solid var(--border);
   background-color: #ffffff;
   padding: 0.85rem 1rem;
   color: var(--dark);
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.35;
   outline: none;
   transition:
@@ -264,6 +264,9 @@ img {
 }
 
 .footer-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   color: #c9c9c2;
   font-size: 0.875rem;
   transition: color 160ms ease;

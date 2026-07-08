@@ -12,6 +12,7 @@ import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata("/services");
 
 const serviceImages = [images.documents, images.dialogue, images.building, images.hero];
+const mobileServiceLabels = ["Diagnostic", "Conflits", "Médiation", "Managers"];
 
 export default function ServicesPage() {
   return (
@@ -21,20 +22,34 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="Quatre domaines d'intervention, un objectif : des relations durables"
       />
-      <nav className="border-b border-black/5 bg-white py-5" aria-label="Sommaire des services">
-        <div className="dg-container flex flex-wrap items-center gap-3">
+      <nav className="border-b border-black/5 bg-white py-4 sm:py-5" aria-label="Sommaire des services">
+        <div className="dg-container flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <span className="text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--muted-soft)]">
             Aller à
           </span>
-          {services.map((service) => (
-            <Link
-              className="min-h-11 rounded-full border border-[var(--border)] px-4 py-2 text-sm font-extrabold text-[var(--dark-soft)] hover:border-[var(--accent-dark)] hover:text-[var(--accent-dark)]"
-              href={`#${service.id}`}
-              key={service.id}
-            >
-              {service.number} · {service.title}
-            </Link>
-          ))}
+          <div className="relative -mr-4 sm:mr-0">
+            <div className="flex snap-x gap-2 overflow-x-auto overscroll-x-contain pr-10 sm:flex-wrap sm:overflow-visible sm:pr-0">
+              {services.map((service, index) => (
+                <Link
+                  className="min-h-11 max-w-[165px] shrink-0 snap-start truncate rounded-full border border-[var(--border)] px-4 py-2 text-sm font-extrabold text-[var(--dark-soft)] hover:border-[var(--accent-dark)] hover:text-[var(--accent-dark)] sm:max-w-none"
+                  href={`#${service.id}`}
+                  key={service.id}
+                  title={`${service.number} · ${service.title}`}
+                >
+                  <span className="sm:hidden">
+                    {service.number} · {mobileServiceLabels[index]}
+                  </span>
+                  <span className="hidden sm:inline">
+                    {service.number} · {service.title}
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent sm:hidden"
+            />
+          </div>
         </div>
       </nav>
       <section className="bg-white">
@@ -53,7 +68,7 @@ export default function ServicesPage() {
                 <div className="flex flex-col gap-5">
                   <div className="flex items-center gap-4">
                     <ServiceIcon id={service.id} size="sm" />
-                    <span className="text-sm font-extrabold text-[var(--muted-soft)]">
+                    <span className={dark ? "text-sm font-extrabold text-[var(--accent-light)]" : "text-sm font-extrabold text-[var(--muted-soft)]"}>
                       {service.number}
                     </span>
                   </div>
@@ -87,7 +102,7 @@ export default function ServicesPage() {
       <section className="bg-white py-14">
         <div className="dg-container">
           <SectionHeading
-            description="La gestion de projet est ici traitée comme une organisation du dialogue social : planifier les échanges, cadrer les négociations collectives et structurer la communication interne."
+            description="Chaque mission débute par une analyse de la situation. Le cadre, les objectifs, les parties concernées et les modalités d'intervention sont ensuite définis avant toute proposition d'accompagnement."
             eyebrow="Cadre d'intervention"
             title="Pas de méthode générique : une démarche adaptée à la situation"
           />
@@ -110,11 +125,12 @@ function ServiceImage({
         aria-hidden="true"
         className="h-72 w-full rounded-[var(--radius-card)] object-cover"
         height={500}
+        loading="lazy"
         src={image}
         width={500}
       />
       <div className={dark ? "rounded-[var(--radius-panel)] bg-white/10 p-5" : "rounded-[var(--radius-panel)] bg-[var(--background)] p-5"}>
-        <p className="text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--accent-dark)]">
+        <p className={dark ? "text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--accent-light)]" : "text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--accent-dark)]"}>
           Résultat recherché
         </p>
         <p className={dark ? "mt-2 text-sm leading-7 text-neutral-300" : "mt-2 text-sm leading-7 text-[var(--text-soft)]"}>

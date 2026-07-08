@@ -30,7 +30,7 @@ export function ContactForm() {
   const [consentAccepted, setConsentAccepted] = useState(false);
 
   const sending = status === "sending";
-  const submitDisabled = sending || !consentAccepted;
+  const submitDisabled = sending;
   const fieldClass = "dg-field";
   const selectClass = "dg-field dg-select";
 
@@ -40,7 +40,7 @@ export function ContactForm() {
     const formData = new FormData(form);
     const nextErrors: Record<string, string> = {};
 
-    const requiredFields = ["firstName", "lastName", "email", "requestType", "message", "consent"];
+    const requiredFields = ["lastName", "requestType", "message", "consent"];
 
     for (const field of requiredFields) {
       if (!formData.get(field)) {
@@ -49,6 +49,12 @@ export function ContactForm() {
     }
 
     const email = String(formData.get("email") ?? "");
+    const phone = String(formData.get("phone") ?? "");
+    if (!email && !phone) {
+      nextErrors.email = "Indiquez au moins un email ou un téléphone.";
+      nextErrors.phone = "Indiquez au moins un email ou un téléphone.";
+    }
+
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       nextErrors.email = "Adresse email invalide.";
     }
@@ -91,27 +97,33 @@ export function ContactForm() {
       onSubmit={handleSubmit}
     >
       <input name="form-name" type="hidden" value="contact" />
-      <p className="hidden">
+      <p aria-hidden="true" className="hidden">
         <label>
-          Ne pas remplir ce champ <input name="bot-field" tabIndex={-1} />
+          Ne pas remplir ce champ <input autoComplete="off" name="bot-field" tabIndex={-1} />
         </label>
       </p>
+      <div>
+        <h2 className="text-base font-extrabold text-[var(--dark-soft)]">Champs essentiels</h2>
+        <p className="mt-1 text-sm leading-6 text-[var(--muted)]">
+          Nom, moyen de contact, type de demande et situation.
+        </p>
+      </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field error={errors.firstName} label="Prénom" name="firstName" required>
-          <input className={fieldClass} id="firstName" maxLength={80} name="firstName" placeholder="Votre prénom" required type="text" />
+        <Field label="Prénom" name="firstName" optionalText="facultatif">
+          <input className={fieldClass} id="firstName" maxLength={80} name="firstName" placeholder="Votre prénom" type="text" />
         </Field>
         <Field error={errors.lastName} label="Nom" name="lastName" required>
-          <input className={fieldClass} id="lastName" maxLength={80} name="lastName" placeholder="Votre nom" required type="text" />
+          <input aria-describedby={errors.lastName ? "lastName-error" : undefined} aria-invalid={Boolean(errors.lastName)} className={fieldClass} id="lastName" maxLength={80} name="lastName" placeholder="Votre nom" required type="text" />
         </Field>
-        <Field error={errors.email} label="Email" name="email" required>
-          <input className={fieldClass} id="email" maxLength={160} name="email" placeholder="vous@exemple.fr" required type="email" />
+        <Field error={errors.email} label="Email" name="email">
+          <input aria-describedby={errors.email ? "email-error" : undefined} aria-invalid={Boolean(errors.email)} className={fieldClass} id="email" maxLength={160} name="email" placeholder="vous@exemple.fr" type="email" />
         </Field>
-        <Field label="Téléphone" name="phone">
-          <input className={fieldClass} id="phone" maxLength={40} name="phone" placeholder="+590 ..." type="tel" />
+        <Field error={errors.phone} label="Téléphone" name="phone">
+          <input aria-describedby={errors.phone ? "phone-error" : undefined} aria-invalid={Boolean(errors.phone)} className={fieldClass} id="phone" maxLength={40} name="phone" placeholder="+590 ..." type="tel" />
         </Field>
       </div>
       <Field error={errors.requestType} label="Type de demande" name="requestType" required>
-        <select className={selectClass} defaultValue="" id="requestType" name="requestType" required>
+        <select aria-describedby={errors.requestType ? "requestType-error" : undefined} aria-invalid={Boolean(errors.requestType)} className={selectClass} defaultValue="" id="requestType" name="requestType" required>
           <option disabled value="">
             Sélectionner
           </option>
@@ -122,14 +134,32 @@ export function ContactForm() {
           ))}
         </select>
       </Field>
+      <Field error={errors.message} label="Votre situation, en quelques lignes" name="message" required>
+        <textarea
+          aria-describedby={errors.message ? "message-error" : undefined}
+          aria-invalid={Boolean(errors.message)}
+          className={`${fieldClass} min-h-40 resize-y`}
+          id="message"
+          maxLength={1800}
+          name="message"
+          placeholder="Décrivez le contexte général. Inutile de transmettre des documents ou des informations sensibles à ce stade."
+          required
+        />
+      </Field>
+      <div className="border-t border-[var(--line)] pt-5">
+        <h2 className="text-base font-extrabold text-[var(--dark-soft)]">Informations facultatives</h2>
+        <p className="mt-1 text-sm leading-6 text-[var(--muted)]">
+          Elles peuvent aider à préparer le premier échange.
+        </p>
+      </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Structure" name="organization">
+        <Field label="Structure" name="organization" optionalText="facultatif">
           <input className={fieldClass} id="organization" maxLength={120} name="organization" placeholder="Nom de votre structure" type="text" />
         </Field>
-        <Field label="Fonction" name="role">
+        <Field label="Fonction" name="role" optionalText="facultatif">
           <input className={fieldClass} id="role" maxLength={120} name="role" placeholder="Votre fonction" type="text" />
         </Field>
-        <Field label="Service recherché" name="service">
+        <Field label="Service recherché" name="service" optionalText="facultatif">
           <select className={selectClass} id="service" name="service">
             {serviceOptions.map((service) => (
               <option key={service} value={service}>
@@ -138,7 +168,7 @@ export function ContactForm() {
             ))}
           </select>
         </Field>
-        <Field label="Préférence de contact" name="contactPreference">
+        <Field label="Préférence de contact" name="contactPreference" optionalText="facultatif">
           <select className={selectClass} id="contactPreference" name="contactPreference">
             {contactPreferences.map((preference) => (
               <option key={preference} value={preference}>
@@ -148,18 +178,10 @@ export function ContactForm() {
           </select>
         </Field>
       </div>
-      <Field error={errors.message} label="Votre situation, en quelques lignes" name="message" required>
-        <textarea
-          className={`${fieldClass} min-h-36 resize-y`}
-          id="message"
-          maxLength={1800}
-          name="message"
-          placeholder="Décrivez le contexte général. Inutile de transmettre des documents ou des informations sensibles à ce stade."
-          required
-        />
-      </Field>
       <label className="flex cursor-pointer gap-3 text-sm leading-6 text-[var(--text-soft)]">
         <input
+          aria-describedby={errors.consent ? "consent-error" : undefined}
+          aria-invalid={Boolean(errors.consent)}
           checked={consentAccepted}
           className="mt-1 size-5 cursor-pointer accent-[var(--accent-dark)]"
           name="consent"
@@ -171,7 +193,7 @@ export function ContactForm() {
           J'accepte que mes données soient utilisées pour traiter ma demande,
           conformément à la politique de confidentialité.
           {errors.consent ? (
-            <span className="block font-bold text-red-700">{errors.consent}</span>
+            <span className="block font-bold text-red-700" id="consent-error">{errors.consent}</span>
           ) : null}
         </span>
       </label>
@@ -182,7 +204,7 @@ export function ContactForm() {
           automatiquement un rendez-vous.
         </p>
         <button
-          className="inline-flex dg-cta dg-cta-dark min-h-12 shrink-0 px-8"
+          className="inline-flex dg-cta dg-cta-dark min-h-12 w-full shrink-0 px-8 sm:w-auto"
           disabled={submitDisabled}
           type="submit"
         >
@@ -212,12 +234,14 @@ function Field({
   error,
   label,
   name,
+  optionalText,
   required = false,
 }: Readonly<{
   children: React.ReactNode;
   error?: string;
   label: string;
   name: string;
+  optionalText?: string;
   required?: boolean;
 }>) {
   return (
@@ -225,9 +249,12 @@ function Field({
       <span className="text-sm font-extrabold text-[var(--dark-soft)]">
         {label}
         {required ? " *" : ""}
+        {optionalText ? (
+          <span className="ml-1 font-semibold text-[var(--muted-soft)]">({optionalText})</span>
+        ) : null}
       </span>
       {children}
-      {error ? <span className="text-sm font-bold text-red-700">{error}</span> : null}
+      {error ? <span className="text-sm font-bold text-red-700" id={`${name}-error`}>{error}</span> : null}
     </label>
   );
 }

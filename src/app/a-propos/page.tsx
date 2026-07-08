@@ -45,10 +45,16 @@ export default function AboutPage() {
             <p className="mt-5 max-w-3xl text-[16.5px] leading-[1.7] text-[var(--text-soft)]">
               Professionnel de santé de formation, Élière Guieba a passé plus
               de quinze ans au cœur du dialogue social du secteur privé de la
-              santé en Guadeloupe. Ce que d'autres ont appris dans les livres,
-              il l'a pratiqué : négociations collectives, élections
-              professionnelles, plans de sauvegarde de l'emploi, gestion de
-              conflits, accompagnement de salariés.
+              santé en Guadeloupe. Son expertise s'est construite sur le
+              terrain, au fil de négociations collectives, d'élections
+              professionnelles, de restructurations et de situations de conflit
+              complexes.
+            </p>
+            <p className="mt-4 max-w-3xl text-[16.5px] leading-[1.7] text-[var(--text-soft)]">
+              Cette expérience lui permet aujourd'hui de comprendre les
+              contraintes, les attentes et les modes de fonctionnement de chaque
+              partie, tout en intervenant dans un cadre indépendant,
+              confidentiel et impartial.
             </p>
             <p className="mt-4 max-w-3xl text-[16.5px] leading-[1.7] text-[var(--text-soft)]">
               DÉGGANTE Consulting est né de cette conviction : la plupart des

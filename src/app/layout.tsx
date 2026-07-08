@@ -52,7 +52,7 @@ type RootLayoutProps = Readonly<{
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="fr">
+    <html data-scroll-behavior="smooth" lang="fr">
       <body>
         <a className="skip-link" href="#contenu">
           Aller au contenu
