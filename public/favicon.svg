@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" role="img" aria-label="DÉGGANTE Consulting">
+  <circle cx="70" cy="70" r="62" fill="#050505"/>
+  <path d="M24 54c10-22 40-33 72-22l-6-10c16 5 28 17 34 31-13-11-30-17-50-17-22 0-39 7-50 18Z" fill="#36B24A"/>
+  <path d="M116 86c-11 20-41 30-71 18l7 11c-17-5-29-16-36-30 14 10 31 16 51 16 22 0 39-6 49-15Z" fill="#333333"/>
+  <path d="M19 66c3-31 28-55 60-58" fill="none" stroke="#1E7A2E" stroke-width="5" stroke-linecap="round"/>
+  <path d="M121 74c-3 31-28 55-60 58" fill="none" stroke="#36B24A" stroke-width="5" stroke-linecap="round"/>
+</svg>
