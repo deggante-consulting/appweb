@@ -85,10 +85,8 @@ export function ContactForm() {
     <form
       action="/contact"
       className="dg-card flex flex-col gap-5 p-6 sm:p-9"
-      data-netlify="true"
       method="POST"
       name="contact"
-      netlify-honeypot="bot-field"
       noValidate
       onSubmit={handleSubmit}
     >
