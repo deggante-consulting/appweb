@@ -175,7 +175,7 @@ export const processSteps = [
 export const reasons = [
   {
     title: "L'expérience du terrain",
-    text: "Plus de quinze ans de dialogue social vécu de l'intérieur, dans le secteur privé de la santé en Guadeloupe.",
+    text: "Plus de quinze ans de dialogue social vécu de l'intérieur, dans le secteur privé et public en Guadeloupe.",
   },
   {
     title: "Toutes les parties comprises",
@@ -226,11 +226,11 @@ export const consultant = {
   name: "Élière Guieba",
   role: "Consultant en relations sociales professionnelles",
   shortBio:
-    "Préparateur en pharmacie de formation, Élière Guieba a construit son expertise sur le terrain, au cœur du dialogue social du secteur privé de la santé en Guadeloupe.",
+    "Professionnel de santé de formation, Élière Guieba a construit son expertise sur le terrain, au cœur du dialogue social du secteur privé de la santé en Guadeloupe.",
   longBio:
-    "Préparateur en pharmacie de formation, Élière Guieba a passé plus de quinze ans au cœur du dialogue social du secteur privé de la santé en Guadeloupe. Négociations collectives, élections professionnelles, plans de sauvegarde de l'emploi, prévention et gestion des conflits : il connaît le dialogue social pour l'avoir pratiqué des deux côtés de la table.",
+    "Professionnel de santé de formation, Élière Guieba a passé plus de quinze ans au cœur du dialogue social du secteur privé de la santé en Guadeloupe. Négociations collectives, élections professionnelles, plans de sauvegarde de l'emploi, prévention et gestion des conflits : il connaît le dialogue social pour l'avoir pratiqué des deux côtés de la table.",
   quote:
-    "Une relation sociale de qualité est une condition de la performance collective et de la santé de chacun.",
+    "Une relation sociale de qualité est une condition de la performance collective et de la préservation de la santé de chacun.",
 };
 
 export const timeline = [

@@ -43,7 +43,7 @@ export default function AboutPage() {
               {consultant.role} — fondateur de DÉGGANTE Consulting
             </p>
             <p className="mt-5 max-w-3xl text-[16.5px] leading-[1.7] text-[var(--text-soft)]">
-              Préparateur en pharmacie de formation, Élière Guieba a passé plus
+              Professionnel de santé de formation, Élière Guieba a passé plus
               de quinze ans au cœur du dialogue social du secteur privé de la
               santé en Guadeloupe. Ce que d'autres ont appris dans les livres,
               il l'a pratiqué : négociations collectives, élections

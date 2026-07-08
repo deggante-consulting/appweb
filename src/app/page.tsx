@@ -50,9 +50,10 @@ export default function Home() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-200">
               L'expérience du dialogue social au service des employeurs et de
-              leurs équipes. DÉGGANTE Consulting aide directions, managers et
-              collectivités à prévenir les tensions, restaurer le dialogue et
-              préparer les négociations en Guadeloupe et dans la Caraïbe.
+              leurs équipes. DÉGGANTE Consulting aide directions, managers,
+              salariés et collectivités à prévenir les tensions, restaurer le
+              dialogue et préparer les négociations en Guadeloupe et dans la
+              Caraïbe.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href="/contact">Demander un premier échange</ButtonLink>
