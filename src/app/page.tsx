@@ -238,7 +238,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="Nos valeurs"
             light
-            title="Quatre repères, en créole et en français"
+            title="Quatre repères pour guider chaque intervention"
           />
           <div className="mt-7 sm:mt-9">
             <ValuesGrid />

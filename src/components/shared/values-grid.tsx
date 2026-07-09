@@ -9,9 +9,6 @@ export function ValuesGrid() {
           key={value.creole}
         >
           <h3 className="text-xl font-extrabold text-[var(--accent)] sm:text-2xl">{value.creole}</h3>
-          <p className="mt-2 text-xs font-extrabold uppercase tracking-[0.12em] text-[#c9c9c2]">
-            {value.label}
-          </p>
           <p className="mt-3 text-sm leading-6 text-[#c9c9c2] sm:mt-4 sm:leading-7">{value.text}</p>
         </article>
       ))}

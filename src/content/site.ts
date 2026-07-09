@@ -208,7 +208,7 @@ export const values = [
   {
     creole: "Nou vré",
     label: "La sincérité",
-    text: "Dire les choses avec justesse, sans détour inutile.",
+    text: "Dire les choses avec justesse, clarté et honnêteté.",
   },
   {
     creole: "Gadé pli lwen",
