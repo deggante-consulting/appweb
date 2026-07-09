@@ -176,7 +176,7 @@ export default function Home() {
           <div>
             <SectionHeading
               eyebrow="Pourquoi DÉGGANTE Consulting"
-              title="Une expertise construite sur le terrain, pas en théorie"
+              title="Une expertise construite sur le terrain"
             />
             <div className="mt-7 grid gap-4 md:mt-9 md:grid-cols-2 md:gap-6">
               {reasons.map((reason) => (

@@ -106,7 +106,7 @@ export const services = [
     summary:
       "Préparer les échéances sensibles, faciliter les échanges et structurer la communication interne.",
     intro:
-      "Une négociation se gagne d'abord dans sa préparation. DÉGGANTE Consulting aide à structurer le dialogue social, à préparer les échéances sensibles et à faciliter les échanges.",
+      "La qualité d'une négociation dépend avant tout de sa préparation. DÉGGANTE Consulting aide à structurer le dialogue social, à préparer les échéances sensibles et à faciliter les échanges.",
     actions: [
       "Préparation des réunions sensibles et des négociations collectives",
       "Organisation des négociations collectives",
@@ -228,7 +228,7 @@ export const consultant = {
   shortBio:
     "Professionnel de santé de formation, Élière Guieba a construit son expertise sur le terrain, au cœur du dialogue social du secteur privé de la santé en Guadeloupe.",
   longBio:
-    "Professionnel de santé de formation, Élière Guieba a passé plus de quinze ans au cœur du dialogue social du secteur privé de la santé en Guadeloupe. Négociations collectives, élections professionnelles, plans de sauvegarde de l'emploi, prévention et gestion des conflits : il connaît le dialogue social pour l'avoir pratiqué des deux côtés de la table.",
+    "Professionnel de santé de formation, Élière Guieba a passé plus de quinze ans au cœur du dialogue social du secteur privé de la santé en Guadeloupe. Négociations collectives, élections professionnelles, plans de sauvegarde de l'emploi, prévention et gestion des conflits : son expérience lui permet de comprendre les contraintes, les attentes et les responsabilités de chaque partie.",
   quote:
     "Une relation sociale de qualité est une condition de la performance collective et de la préservation de la santé de chacun.",
 };

@@ -110,11 +110,12 @@ export default function AboutPage() {
               Le dialogue n'est pas un risque. C'est une méthode.
             </h2>
             <p className="mt-5 text-[16.5px] leading-[1.7] text-[#c9c9c2]">
-              Avoir siégé des deux côtés de la table donne une conviction simple :
-              quand chaque partie comprend les contraintes de l'autre, la plupart
-              des conflits deviennent des problèmes solubles. Le rôle du
-              consultant n'est pas de donner raison, mais de créer les
-              conditions pour que les parties se parlent et se comprennent.
+              Son expérience lui permet de comprendre les contraintes, les
+              attentes et les responsabilités de chaque partie. Quand chaque
+              partie comprend les contraintes de l'autre, la plupart des
+              conflits deviennent des problèmes solubles. Le rôle du consultant
+              n'est pas de donner raison, mais de créer les conditions pour que
+              les parties se parlent et se comprennent.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
