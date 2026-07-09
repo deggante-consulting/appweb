@@ -11,8 +11,8 @@ export function CTASection({
   description = "Un premier échange permet de comprendre votre besoin et de déterminer la suite appropriée : accompagnement, devis ou orientation.",
 }: CTASectionProps) {
   return (
-    <section className="relative overflow-hidden border-t border-white/10 bg-[var(--dark)] py-16 text-center text-white">
-      <div className="dg-container flex flex-col items-center gap-5">
+    <section className="relative overflow-hidden border-t border-white/10 bg-[var(--dark)] py-12 text-center text-white sm:py-14">
+      <div className="dg-container relative flex flex-col items-center gap-5">
         <h2 className="max-w-3xl text-3xl font-extrabold tracking-tight sm:text-4xl">
           {title}
         </h2>

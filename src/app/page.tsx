@@ -232,21 +232,22 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[var(--dark)] py-12 text-white sm:py-20">
-        <DecorativeCurves dark />
-        <div className="dg-container relative">
-          <SectionHeading
-            eyebrow="Nos valeurs"
-            light
-            title="Quatre repères pour guider chaque intervention"
-          />
-          <div className="mt-7 sm:mt-9">
-            <ValuesGrid />
+      <div className="relative overflow-hidden bg-[var(--dark)] text-white">
+        <section className="relative py-12 sm:py-20">
+          <div className="dg-container relative">
+            <SectionHeading
+              eyebrow="Nos valeurs"
+              light
+              title="Quatre repères pour guider chaque intervention"
+            />
+            <div className="mt-7 sm:mt-9">
+              <ValuesGrid />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <CTASection />
+        <CTASection />
+      </div>
     </>
   );
 }

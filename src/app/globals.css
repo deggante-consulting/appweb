@@ -314,6 +314,10 @@ img {
   .dg-container {
     width: min(100% - 3rem, 1328px);
   }
+
+  .footer-link {
+    min-height: auto;
+  }
 }
 
 @media (min-width: 1024px) {
