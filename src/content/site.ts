@@ -35,7 +35,7 @@ export const images = {
   logoDark: "/images/brand/logo-symbol-dark.png",
   motifCurves: "/images/brand/motif-curves.png",
   motifDark: "/images/brand/motif-dark.png",
-  hero: "/images/photos/hero-consulting.png",
+  hero: "/images/photos/banner.webp",
   dialogue: "/images/photos/dialogue-professionnel.png",
   documents: "/images/photos/reunion-documents.png",
   building: "/images/photos/batiment-professionnel.png",

@@ -27,9 +27,9 @@ export const metadata: Metadata = {
       "L'expérience du dialogue social au service des employeurs et de leurs équipes.",
     images: [
       {
-        url: "/images/photos/hero-consulting.png",
-        width: 736,
-        height: 500,
+        url: "/images/photos/banner.webp",
+        width: 960,
+        height: 640,
         alt: "Échange professionnel autour du dialogue social",
       },
     ],
