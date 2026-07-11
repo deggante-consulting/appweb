@@ -36,7 +36,7 @@ export const images = {
   motifCurves: "/images/brand/motif-curves.png",
   motifDark: "/images/brand/motif-dark.png",
   hero: "/images/photos/banner.webp",
-  documents: "/images/photos/reunion-documents.png",
+  fieldExpertise: "/images/photos/expertise-terrain-dialogue-social.webp",
   diagnosticAdvice: "/images/photos/diagnostic-conseil-relations-sociales.webp",
   conflictPrevention: "/images/photos/prevention-gestion-conflits-entreprise.webp",
   consultantPortrait: "/images/photos/eliere-guieba-conseil-accompagnement.webp",

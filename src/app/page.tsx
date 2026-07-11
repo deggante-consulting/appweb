@@ -190,12 +190,13 @@ export default function Home() {
           </div>
           <div className="grid gap-4 lg:gap-5">
             <Image
-              alt="Documents de travail lors d'une réunion"
-              className="hidden h-72 w-full rounded-[var(--radius-card)] object-cover sm:block"
-              height={534}
+              alt="Consultant échangeant avec des professionnels autour d’une situation de dialogue social"
+              className="hidden aspect-[4/3] w-full rounded-[var(--radius-card)] object-cover object-center sm:block"
+              height={4800}
               loading="lazy"
-              src={images.documents}
-              width={480}
+              sizes="(max-width: 1024px) 100vw, 360px"
+              src={images.fieldExpertise}
+              width={7200}
             />
             <div className="rounded-[var(--radius-panel)] bg-[var(--dark)] p-5 text-white sm:p-7">
               <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--accent-light)]">
