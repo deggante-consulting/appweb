@@ -49,7 +49,7 @@ export default function PrivacyPage() {
         </p>
       </PrivacySection>
       <section
-        className="scroll-mt-28 rounded-[var(--radius-panel)] border border-[#ddeedf] bg-[var(--soft)] p-6"
+        className="scroll-mt-28 rounded-[var(--radius-panel)] border border-[var(--soft-border)] bg-[var(--soft)] p-6"
         id="prudence"
       >
         <h2 className="text-xl font-extrabold">Un conseil avant d'écrire</h2>

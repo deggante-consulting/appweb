@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { ButtonLink } from "@/components/shared/button-link";
+import { Eyebrow } from "@/components/shared/eyebrow";
 import { consultant, images } from "@/content/site";
 
 export function ConsultantProfile({ compact = false }: Readonly<{ compact?: boolean }>) {
@@ -20,9 +21,7 @@ export function ConsultantProfile({ compact = false }: Readonly<{ compact?: bool
       </div>
       <div className="flex min-w-0 flex-col gap-5">
         <div>
-          <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--accent-dark)]">
-            Le consultant
-          </p>
+          <Eyebrow>Le consultant</Eyebrow>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
             {consultant.name}
           </h2>
@@ -31,7 +30,7 @@ export function ConsultantProfile({ compact = false }: Readonly<{ compact?: bool
         <p className="max-w-3xl text-base leading-8 text-[var(--text-soft)]">
           {compact ? consultant.shortBio : consultant.longBio}
         </p>
-        <blockquote className="border-l-4 border-[var(--accent)] pl-5 text-lg font-extrabold leading-8 text-[var(--accent-dark)]">
+        <blockquote className="border-l-4 border-[var(--accent)] py-1 pl-6 text-lg font-extrabold leading-8 text-[var(--accent-dark)] sm:text-xl sm:leading-9">
           « {consultant.quote} »
         </blockquote>
         {compact ? (

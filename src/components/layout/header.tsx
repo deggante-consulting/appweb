@@ -97,11 +97,11 @@ export function Header() {
         </div>
       </header>
       <div
-        className={
+        className={`fixed inset-x-0 bottom-0 top-[76px] z-40 min-h-[calc(100dvh-76px)] overflow-y-auto border-t border-black/5 bg-white shadow-2xl transition-[opacity,transform] duration-200 ease-out lg:hidden ${
           open
-            ? "fixed inset-x-0 bottom-0 top-[76px] z-40 min-h-[calc(100dvh-76px)] overflow-y-auto border-t border-black/5 bg-white shadow-2xl lg:hidden"
-            : "hidden"
-        }
+            ? "visible translate-y-0 opacity-100"
+            : "invisible -translate-y-2 opacity-0"
+        }`}
         id="menu-mobile"
       >
         <nav
@@ -128,6 +128,21 @@ export function Header() {
               </Link>
             );
           })}
+          <div className="mt-3 flex flex-col gap-3 border-t border-black/5 pt-5">
+            <Link
+              className="dg-cta dg-cta-dark inline-flex"
+              href="/contact"
+              onClick={() => setOpen(false)}
+            >
+              Demander un premier échange
+              <span aria-hidden="true" className="dg-cta-arrow">
+                →
+              </span>
+            </Link>
+            <a className="dg-cta dg-cta-secondary inline-flex" href={site.phoneHref}>
+              {site.phone}
+            </a>
+          </div>
         </nav>
       </div>
     </>

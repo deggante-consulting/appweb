@@ -1,12 +1,17 @@
+import type { Metadata } from "next";
+
 import { ButtonLink } from "@/components/shared/button-link";
+import { Eyebrow } from "@/components/shared/eyebrow";
+
+export const metadata: Metadata = {
+  title: "Page introuvable",
+};
 
 export default function NotFound() {
   return (
-    <section className="bg-[var(--background)] py-24">
-      <div className="dg-container max-w-2xl text-center">
-        <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-[var(--accent-dark)]">
-          Page introuvable
-        </p>
+    <section className="dg-section bg-[var(--background)]">
+      <div className="dg-container flex max-w-2xl flex-col items-center text-center">
+        <Eyebrow>Page introuvable</Eyebrow>
         <h1 className="mt-4 text-4xl font-extrabold tracking-tight">
           Cette page n'existe pas.
         </h1>

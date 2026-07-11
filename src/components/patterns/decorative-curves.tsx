@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 type DecorativeCurvesProps = Readonly<{
   className?: string;
   dark?: boolean;
@@ -7,12 +11,39 @@ export function DecorativeCurves({
   className = "",
   dark = false,
 }: DecorativeCurvesProps) {
+  const ref = useRef<SVGSVGElement>(null);
+  const [drawing, setDrawing] = useState(false);
   const opacity = dark ? ["0.42", "0.28", "0.18"] : ["0.3", "0.2", "0.12"];
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (!element) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setDrawing(true);
+            observer.disconnect();
+          }
+        }
+      },
+      { threshold: 0.15 },
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <svg
       aria-hidden="true"
-      className={`dg-draw pointer-events-none absolute inset-0 h-full w-full ${className}`}
+      className={`${drawing ? "dg-draw" : "dg-draw-pending"} pointer-events-none absolute inset-0 h-full w-full ${className}`}
+      ref={ref}
       preserveAspectRatio="none"
       viewBox="0 0 1440 640"
     >

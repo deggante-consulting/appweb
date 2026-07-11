@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Reveal } from "@/components/patterns/reveal";
 import { ButtonLink } from "@/components/shared/button-link";
 import { CTASection } from "@/components/shared/cta-section";
 import { PageHero } from "@/components/shared/page-hero";
@@ -84,11 +85,11 @@ export default function ServicesPage() {
 
           return (
             <article
-              className={dark ? "bg-[var(--dark)] py-16 text-white sm:py-20" : index % 2 ? "bg-[var(--background)] py-16 sm:py-20" : "bg-white py-16 sm:py-20"}
+              className={dark ? "dg-section bg-[var(--dark)] text-white" : index % 2 ? "dg-section bg-[var(--background)]" : "dg-section bg-white"}
               id={service.id}
               key={service.id}
             >
-              <div className={index % 2 ? "dg-container grid gap-10 lg:grid-cols-[360px_1fr] lg:items-start" : "dg-container grid gap-10 lg:grid-cols-[1fr_360px] lg:items-start"}>
+              <Reveal className={index % 2 ? "dg-container grid gap-10 lg:grid-cols-[360px_1fr] lg:items-start" : "dg-container grid gap-10 lg:grid-cols-[1fr_360px] lg:items-start"}>
                 {index % 2 ? <ServiceImage dark={dark} image={image} result={service.result} /> : null}
                 <div className="flex flex-col gap-5">
                   <div className="flex items-center gap-4">
@@ -119,12 +120,12 @@ export default function ServicesPage() {
                   </ButtonLink>
                 </div>
                 {index % 2 ? null : <ServiceImage dark={dark} image={image} result={service.result} />}
-              </div>
+              </Reveal>
             </article>
           );
         })}
       </section>
-      <section className="bg-white py-14">
+      <section className="bg-white py-10 sm:py-14">
         <div className="dg-container">
           <SectionHeading
             description="Chaque mission débute par une analyse de la situation. Le cadre, les objectifs, les parties concernées et les modalités d'intervention sont ensuite définis avant toute proposition d'accompagnement."

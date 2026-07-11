@@ -7,17 +7,17 @@ export const metadata = pageMetadata("/contact");
 
 export default function ContactPage() {
   return (
-    <section className="bg-[var(--background)] py-[68px]">
+    <section className="dg-section bg-[var(--background)]">
       <div className="dg-container">
         <IntroBlock
-          className="mb-[26px] dg-fade-up"
+          className="mb-7 dg-fade-up"
           description="Décrivez votre situation en quelques lignes. Nous étudions chaque demande avant de proposer un rendez-vous, un accompagnement ou un devis."
           eyebrow="Contact"
           title="Demander un premier échange"
         />
         <div className="grid gap-10 lg:grid-cols-[1fr_440px] lg:gap-16">
           <ContactForm />
-          <aside className="grid gap-[18px] lg:h-fit">
+          <aside className="grid gap-5 lg:h-fit">
             <div className="relative overflow-hidden rounded-[var(--radius-card)] bg-[var(--dark)] p-8 text-white">
               <h2 className="text-xl font-extrabold">Coordonnées</h2>
               <div className="mt-6 grid gap-5">
@@ -66,7 +66,7 @@ export default function ContactPage() {
                 Pas de réservation automatique, pas de paiement en ligne.
               </p>
             </div>
-            <div className="rounded-[var(--radius-card)] border border-[#ddeedf] bg-[var(--soft)] p-6">
+            <div className="rounded-[var(--radius-card)] border border-[var(--soft-border)] bg-[var(--soft)] p-6">
               <h2 className="font-extrabold">Zones d'intervention</h2>
               <p className="mt-3 text-sm leading-7 text-[var(--text-soft)]">
                 {zones.join(" · ")}

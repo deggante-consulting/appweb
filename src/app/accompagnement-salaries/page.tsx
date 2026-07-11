@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { Reveal } from "@/components/patterns/reveal";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { images, site } from "@/content/site";
@@ -52,14 +53,14 @@ const steps = [
 export default function EmployeeSupportPage() {
   return (
     <>
-      <section className="bg-[var(--soft-band)] py-[68px]">
+      <section className="dg-section bg-[var(--soft-band)]">
         <div className="dg-container grid gap-12 lg:grid-cols-[1fr_380px] lg:items-center">
           <div className="min-w-0 max-w-3xl dg-fade-up">
             <Eyebrow>Accompagnement des salariés</Eyebrow>
-            <h1 className="mt-4 max-w-4xl text-[46px] font-extrabold leading-[1.12] tracking-[-0.015em] max-md:text-4xl">
+            <h1 className="mt-4 max-w-4xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
               Traverser une situation professionnelle difficile, sans rester seul
             </h1>
-            <p className="mt-4 max-w-3xl text-[17px] leading-[1.65] text-[var(--text-soft)]">
+            <p className="mt-4 max-w-3xl text-lg leading-8 text-[var(--text-soft)]">
               Entretien à préparer, conflit, rupture conventionnelle,
               licenciement, arrêt maladie prolongé : DÉGGANTE Consulting vous
               aide à comprendre votre situation, préparer vos échanges et
@@ -86,36 +87,36 @@ export default function EmployeeSupportPage() {
         </div>
       </section>
 
-      <section className="bg-white py-[72px]">
-        <div className="dg-container">
+      <section className="dg-section bg-white">
+        <Reveal className="dg-container">
           <div className="max-w-3xl">
             <Eyebrow>Situations accompagnées</Eyebrow>
-            <h2 className="mt-4 text-[32px] font-extrabold leading-tight tracking-[-0.01em]">
+            <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
               Dans quels cas nous solliciter
             </h2>
           </div>
-          <div className="mt-[30px] grid gap-[18px] md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {situations.map((situation) => (
               <article
-                className="rounded-[var(--radius-small)] bg-[var(--background)] p-[22px]"
+                className="rounded-[var(--radius-small)] bg-[var(--background)] p-6"
                 key={situation.title}
               >
                 <h3 className="text-base font-extrabold text-[var(--dark)]">
                   {situation.title}
                 </h3>
-                <p className="mt-2 text-sm leading-[1.6] text-[var(--text-soft)]">
+                <p className="mt-2 text-sm leading-7 text-[var(--text-soft)]">
                   {situation.text}
                 </p>
               </article>
             ))}
           </div>
-        </div>
+        </Reveal>
       </section>
 
-      <section className="bg-[var(--background)] py-[72px]">
-        <div className="dg-container grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <section className="dg-section bg-[var(--background)]">
+        <Reveal className="dg-container grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <h2 className="text-[28px] font-extrabold leading-tight tracking-[-0.01em]">
+            <h2 className="text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">
               Comment se déroule l'accompagnement
             </h2>
             <div className="mt-6 grid gap-4">
@@ -132,7 +133,7 @@ export default function EmployeeSupportPage() {
                   </span>
                   <div className="pt-1">
                     <h3 className="font-extrabold">{step.title}</h3>
-                    <p className="mt-1 text-[14.5px] leading-[1.6] text-[var(--text-soft)]">
+                    <p className="mt-1 text-sm leading-7 text-[var(--text-soft)]">
                       {step.text}
                     </p>
                   </div>
@@ -140,29 +141,29 @@ export default function EmployeeSupportPage() {
               ))}
             </div>
           </div>
-          <aside className="rounded-[var(--radius-panel)] border border-[var(--card-border)] border-l-4 border-l-[var(--accent)] bg-white p-[30px]">
+          <aside className="rounded-[var(--radius-panel)] border border-[var(--card-border)] border-l-4 border-l-[var(--accent)] bg-white p-7 sm:p-8">
             <h2 className="text-lg font-extrabold">Le cadre de l'intervention</h2>
-            <p className="mt-3 text-[15px] leading-[1.7] text-[var(--text-soft)]">
+            <p className="mt-3 text-sm leading-7 text-[var(--text-soft)]">
               Cet accompagnement ne remplace pas un avocat, un syndicat, un
               psychologue, la médecine du travail ou un professionnel de santé.
             </p>
-            <p className="mt-3 text-[15px] leading-[1.7] text-[var(--text-soft)]">
+            <p className="mt-3 text-sm leading-7 text-[var(--text-soft)]">
               L'intervention de DÉGGANTE Consulting s'arrête lorsque le dossier
               nécessite une procédure judiciaire, ou relève d'un accompagnement
               médical ou psychologique. Dans ce cas, nous vous orientons vers le
               professionnel adapté.
             </p>
           </aside>
-        </div>
+        </Reveal>
       </section>
 
-      <section className="border-t border-[var(--line)] bg-white py-14">
+      <section className="border-t border-[var(--line)] bg-white py-10 sm:py-14">
         <div className="dg-container flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h2 className="text-[26px] font-extrabold tracking-[-0.01em]">
+            <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
               Parlez-nous de votre situation
             </h2>
-            <p className="mt-2 text-[15.5px] text-[var(--text-soft)]">
+            <p className="mt-2 text-base text-[var(--text-soft)]">
               Premier échange confidentiel, sans transmettre de documents
               médicaux ni de données sensibles à ce stade.
             </p>

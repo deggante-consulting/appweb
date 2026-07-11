@@ -9,6 +9,8 @@
   --surface: #ffffff;
   --soft: #eaf7ec;
   --soft-band: #eef7ef;
+  --soft-border: #ddeedf;
+  --on-dark: #c9c9c2;
   --line: #efefea;
   --border: #ddddd5;
   --card-border: #ecece5;
@@ -34,6 +36,7 @@
 html {
   min-height: 100%;
   scroll-behavior: smooth;
+  scroll-padding-top: 92px;
 }
 
 body {
@@ -257,6 +260,24 @@ img {
   animation: dgFadeUp 700ms ease-out both;
 }
 
+.dg-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 550ms ease-out,
+    transform 550ms ease-out;
+}
+
+.dg-reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.dg-draw-pending path {
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 1500;
+}
+
 .dg-draw path {
   stroke-dasharray: 1500;
   stroke-dashoffset: 1500;
@@ -267,7 +288,7 @@ img {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
-  color: #c9c9c2;
+  color: var(--on-dark);
   font-size: 0.875rem;
   transition: color 160ms ease;
 }

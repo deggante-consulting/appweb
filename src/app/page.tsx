@@ -1,9 +1,11 @@
 import Image from "next/image";
 
 import { DecorativeCurves } from "@/components/patterns/decorative-curves";
+import { Reveal } from "@/components/patterns/reveal";
 import { ButtonLink } from "@/components/shared/button-link";
 import { ConsultantProfile } from "@/components/shared/consultant-profile";
 import { CTASection } from "@/components/shared/cta-section";
+import { Eyebrow } from "@/components/shared/eyebrow";
 import { ProcessSteps } from "@/components/shared/process-steps";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { ServiceCard } from "@/components/shared/service-card";
@@ -37,12 +39,9 @@ export default function Home() {
         <DecorativeCurves dark />
         <div className="dg-container relative flex min-h-[calc(100svh-76px)] items-center py-10 sm:min-h-[650px] sm:py-20">
           <div className="max-w-3xl dg-fade-up">
-            <div className="inline-flex items-center gap-3">
-              <span className="h-0.5 w-8 bg-[var(--accent)]" />
-              <p className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-[var(--accent-light)] sm:text-xs sm:tracking-[0.14em]">
-                Cabinet de conseil en relations sociales professionnelles
-              </p>
-            </div>
+            <Eyebrow light>
+              Cabinet de conseil en relations sociales professionnelles
+            </Eyebrow>
             <h1 className="mt-4 text-[42px] font-extrabold leading-[1.02] tracking-tight sm:mt-6 sm:text-6xl">
               Se comprendre
               <br />
@@ -80,7 +79,7 @@ export default function Home() {
           <div className="flex flex-wrap gap-2">
             {audiences.map((audience) => (
               <span
-                className="rounded-full border border-[#ddeedf] bg-[var(--soft)] px-4 py-2 text-sm font-extrabold text-[var(--accent-dark)]"
+                className="rounded-full border border-[var(--soft-border)] bg-[var(--soft)] px-4 py-2 text-sm font-extrabold text-[var(--accent-dark)]"
                 key={audience}
               >
                 {audience}
@@ -99,7 +98,7 @@ export default function Home() {
       </section>
 
       <section className="dg-section bg-[var(--background)]">
-        <div className="dg-container">
+        <Reveal className="dg-container">
           <div className="mb-7 flex flex-col gap-5 md:mb-10 md:flex-row md:items-end md:justify-between">
             <SectionHeading
               description="Du diagnostic à l'accompagnement opérationnel, chaque intervention vise le même objectif : des relations professionnelles durables."
@@ -115,11 +114,11 @@ export default function Home() {
               <ServiceCard key={service.id} service={service} />
             ))}
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <section className="dg-section bg-white">
-        <div className="dg-container grid gap-8 lg:grid-cols-[420px_1fr] lg:items-center">
+        <Reveal className="dg-container grid gap-8 lg:grid-cols-[420px_1fr] lg:items-center">
           <div className="relative min-w-0">
             <div className="absolute -left-3 -top-3 size-28 rounded-tl-2xl border-l-4 border-t-4 border-[var(--accent)]" />
             <Image
@@ -152,11 +151,11 @@ export default function Home() {
               ))}
             </ul>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <section className="dg-section bg-[var(--background)]">
-        <div className="dg-container relative">
+        <Reveal className="dg-container relative">
           <DecorativeCurves className="left-auto right-0 top-0 h-72 w-1/2 opacity-60" />
           <SectionHeading
             eyebrow="Méthode"
@@ -169,11 +168,11 @@ export default function Home() {
             Chaque situation est différente : la démarche s'ajuste, elle ne
             s'impose pas.
           </p>
-        </div>
+        </Reveal>
       </section>
 
       <section className="dg-section bg-white">
-        <div className="dg-container grid gap-6 lg:grid-cols-[1fr_360px] lg:items-start">
+        <Reveal className="dg-container grid gap-6 lg:grid-cols-[1fr_360px] lg:items-start">
           <div>
             <SectionHeading
               eyebrow="Pourquoi DÉGGANTE Consulting"
@@ -181,7 +180,7 @@ export default function Home() {
             />
             <div className="mt-7 grid gap-4 md:mt-9 md:grid-cols-2 md:gap-6">
               {reasons.map((reason) => (
-                <article className="border-t-2 border-[#e3f2e5] pt-3 md:pt-4" key={reason.title}>
+                <article className="border-t-2 border-[var(--soft-border)] pt-3 md:pt-4" key={reason.title}>
                   <h3 className="font-extrabold">{reason.title}</h3>
                   <p className="mt-2 text-sm leading-7 text-[var(--text-soft)]">{reason.text}</p>
                 </article>
@@ -208,19 +207,19 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <section className="dg-section bg-[var(--background)]">
-        <div className="dg-container">
+        <Reveal className="dg-container">
           <ConsultantProfile compact />
-        </div>
+        </Reveal>
       </section>
 
-      <section className="border-y border-[#ddeedf] bg-[var(--soft)] py-8 sm:py-12">
+      <section className="border-y border-[var(--soft-border)] bg-[var(--soft)] py-10 sm:py-14">
         <div className="dg-container flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-3xl">
-            <h2 className="text-2xl font-extrabold">Vous êtes salarié ?</h2>
+            <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">Vous êtes salarié ?</h2>
             <p className="mt-3 leading-7 text-[var(--text-soft)] sm:leading-8">
               Un accompagnement dédié existe pour préparer un échange avec
               l'employeur, une rupture conventionnelle, un licenciement ou une
@@ -235,8 +234,8 @@ export default function Home() {
       </section>
 
       <div className="relative overflow-hidden bg-[var(--dark)] text-white">
-        <section className="relative py-12 sm:py-20">
-          <div className="dg-container relative">
+        <section className="dg-section relative">
+          <Reveal className="dg-container relative">
             <SectionHeading
               eyebrow="Nos valeurs"
               light
@@ -245,7 +244,7 @@ export default function Home() {
             <div className="mt-7 sm:mt-9">
               <ValuesGrid />
             </div>
-          </div>
+          </Reveal>
         </section>
 
         <CTASection />
