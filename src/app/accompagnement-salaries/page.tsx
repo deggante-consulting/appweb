@@ -54,7 +54,7 @@ export default function EmployeeSupportPage() {
     <>
       <section className="bg-[var(--soft-band)] py-[68px]">
         <div className="dg-container grid gap-12 lg:grid-cols-[1fr_380px] lg:items-center">
-          <div className="max-w-3xl dg-fade-up">
+          <div className="min-w-0 max-w-3xl dg-fade-up">
             <Eyebrow>Accompagnement des salariés</Eyebrow>
             <h1 className="mt-4 max-w-4xl text-[46px] font-extrabold leading-[1.12] tracking-[-0.015em] max-md:text-4xl">
               Traverser une situation professionnelle difficile, sans rester seul
@@ -75,11 +75,13 @@ export default function EmployeeSupportPage() {
             </div>
           </div>
           <Image
-            alt="Écoute individuelle dans un cadre professionnel"
-            className="h-[340px] w-full rounded-[var(--radius-card)] object-cover"
-            height={534}
-            src={images.dialogue}
-            width={480}
+            alt="Échange confidentiel entre un salarié et un accompagnant"
+            className="aspect-[4/3] w-full min-w-0 rounded-[var(--radius-card)] object-cover object-center"
+            height={1086}
+            priority
+            sizes="(max-width: 1024px) 100vw, 380px"
+            src={images.employeeSupport}
+            width={1448}
           />
         </div>
       </section>

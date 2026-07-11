@@ -1,7 +1,9 @@
+import Image from "next/image";
+
 import { DecorativeCurves } from "@/components/patterns/decorative-curves";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Eyebrow } from "@/components/shared/eyebrow";
-import { consultant, timeline, values, zones } from "@/content/site";
+import { consultant, images, timeline, values, zones } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata("/a-propos");
@@ -9,22 +11,20 @@ export const metadata = pageMetadata("/a-propos");
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-white py-[76px]">
+      <section className="overflow-hidden bg-white py-[76px]">
         <div className="dg-container grid gap-14 lg:grid-cols-[420px_1fr] lg:items-center lg:gap-[72px]">
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="absolute -left-4 -top-4 size-[130px] rounded-tl-[var(--radius-card)] border-l-4 border-t-4 border-[var(--accent)]" />
-            <div className="relative flex h-[500px] items-center justify-center overflow-hidden rounded-[var(--radius-card)] border border-[var(--card-border)] bg-gradient-to-br from-white to-[var(--soft)] p-8 text-center">
-              <div className="absolute inset-x-8 top-12 h-40 rounded-full border border-[var(--accent)]/20" />
-              <div className="relative">
-                <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--accent-dark)]">
-                  Portrait à venir
-                </p>
-                <p className="mt-3 max-w-60 text-sm font-semibold leading-6 text-[var(--text-soft)]">
-                  Photo professionnelle d'Élière Guieba à intégrer.
-                </p>
-              </div>
-            </div>
-            <div className="absolute bottom-7 right-[-18px] rounded-[var(--radius-page)] bg-[var(--dark)] px-5 py-3">
+            <Image
+              alt="Élière Guieba, fondateur de DÉGGANTE Consulting"
+              className="relative aspect-[4/5] w-full rounded-[var(--radius-card)] border border-[var(--card-border)] object-cover object-top"
+              height={1402}
+              priority
+              sizes="(max-width: 1024px) 100vw, 420px"
+              src={images.consultantAboutPortrait}
+              width={1122}
+            />
+            <div className="absolute bottom-7 right-4 rounded-[var(--radius-page)] bg-[var(--dark)] px-5 py-3 lg:right-[-18px]">
               <strong className="block text-xl font-extrabold text-[var(--accent)]">
                 Depuis 2010
               </strong>
@@ -34,7 +34,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="dg-fade-up">
+          <div className="min-w-0 dg-fade-up">
             <Eyebrow>À propos</Eyebrow>
             <h1 className="mt-4 text-[46px] font-extrabold leading-[1.12] tracking-[-0.015em] max-md:text-4xl">
               {consultant.name}

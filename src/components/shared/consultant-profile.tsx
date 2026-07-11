@@ -1,24 +1,24 @@
+import Image from "next/image";
+
 import { ButtonLink } from "@/components/shared/button-link";
-import { consultant } from "@/content/site";
+import { consultant, images } from "@/content/site";
 
 export function ConsultantProfile({ compact = false }: Readonly<{ compact?: boolean }>) {
   return (
     <div className="grid gap-10 lg:grid-cols-[400px_1fr] lg:items-center lg:gap-16">
-      <div className="relative">
+      <div className="relative min-w-0">
         <div className="absolute -bottom-3 -right-3 size-32 rounded-br-[var(--radius-card)] border-b-4 border-r-4 border-[var(--accent)]" />
-        <div className="relative flex min-h-[470px] items-center justify-center overflow-hidden rounded-[var(--radius-card)] border border-[var(--card-border)] bg-gradient-to-br from-white to-[var(--soft)] p-8 text-center">
-          <div className="absolute inset-x-8 top-8 h-40 rounded-full border border-[var(--accent)]/20" />
-          <div className="relative">
-            <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--accent-dark)]">
-              Portrait à venir
-            </p>
-            <p className="mt-3 max-w-60 text-sm font-semibold leading-6 text-[var(--text-soft)]">
-              Photo professionnelle d'Élière Guieba à intégrer.
-            </p>
-          </div>
-        </div>
+        <Image
+          alt="Élière Guieba travaillant sur un accompagnement en relations sociales"
+          className="relative aspect-[3/4] w-full rounded-[var(--radius-card)] border border-[var(--card-border)] object-cover object-top"
+          height={1448}
+          loading="lazy"
+          sizes="(max-width: 1024px) 100vw, 400px"
+          src={images.consultantPortrait}
+          width={1086}
+        />
       </div>
-      <div className="flex flex-col gap-5">
+      <div className="flex min-w-0 flex-col gap-5">
         <div>
           <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--accent-dark)]">
             Le consultant

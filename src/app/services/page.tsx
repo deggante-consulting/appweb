@@ -11,7 +11,32 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata("/services");
 
-const serviceImages = [images.documents, images.dialogue, images.building, images.hero];
+const serviceImages = [
+  {
+    alt: "Deux professionnels analysant une situation de relations sociales",
+    height: 1086,
+    src: images.diagnosticAdvice,
+    width: 1448,
+  },
+  {
+    alt: "Médiatrice facilitant un échange entre deux professionnelles",
+    height: 900,
+    src: images.conflictPrevention,
+    width: 1200,
+  },
+  {
+    alt: "Accord conclu à l'issue d'une négociation professionnelle",
+    height: 1086,
+    src: images.negotiationAgreement,
+    width: 1448,
+  },
+  {
+    alt: "Managers participant à un atelier de formation professionnelle",
+    height: 1024,
+    src: images.managerTraining,
+    width: 1536,
+  },
+];
 const mobileServiceLabels = ["Diagnostic", "Conflits", "Médiation", "Managers"];
 
 export default function ServicesPage() {
@@ -117,17 +142,21 @@ function ServiceImage({
   dark,
   image,
   result,
-}: Readonly<{ dark: boolean; image: string; result: string }>) {
+}: Readonly<{
+  dark: boolean;
+  image: { alt: string; height: number; src: string; width: number };
+  result: string;
+}>) {
   return (
     <div className="grid gap-4">
       <Image
-        alt=""
-        aria-hidden="true"
-        className="h-72 w-full rounded-[var(--radius-card)] object-cover"
-        height={500}
+        alt={image.alt}
+        className="aspect-[4/3] w-full rounded-[var(--radius-card)] object-cover object-center"
+        height={image.height}
         loading="lazy"
-        src={image}
-        width={500}
+        sizes="(max-width: 1024px) 100vw, 360px"
+        src={image.src}
+        width={image.width}
       />
       <div className={dark ? "rounded-[var(--radius-panel)] bg-white/10 p-5" : "rounded-[var(--radius-panel)] bg-[var(--background)] p-5"}>
         <p className={dark ? "text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--accent-light)]" : "text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--accent-dark)]"}>

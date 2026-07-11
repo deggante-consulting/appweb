@@ -36,10 +36,15 @@ export const images = {
   motifCurves: "/images/brand/motif-curves.png",
   motifDark: "/images/brand/motif-dark.png",
   hero: "/images/photos/banner.webp",
-  dialogue: "/images/photos/dialogue-professionnel.png",
   documents: "/images/photos/reunion-documents.png",
-  building: "/images/photos/batiment-professionnel.png",
-  consultantPortrait: "/images/photos/portrait-eliere-guieba.jpg",
+  diagnosticAdvice: "/images/photos/diagnostic-conseil-relations-sociales.webp",
+  conflictPrevention: "/images/photos/prevention-gestion-conflits-entreprise.webp",
+  consultantPortrait: "/images/photos/eliere-guieba-conseil-accompagnement.webp",
+  consultantAboutPortrait: "/images/photos/eliere-guieba-deggante-consulting.webp",
+  employeeSupport: "/images/photos/accompagnement-salarie-ecoute-individuelle.webp",
+  socialDialogue: "/images/photos/mediation-dialogue-social-entreprise.webp",
+  negotiationAgreement: "/images/photos/accord-negociation-relations-sociales.webp",
+  managerTraining: "/images/photos/formation-accompagnement-managers.webp",
 };
 
 export const audiences = [

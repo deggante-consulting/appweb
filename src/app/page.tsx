@@ -120,22 +120,23 @@ export default function Home() {
 
       <section className="dg-section bg-white">
         <div className="dg-container grid gap-8 lg:grid-cols-[420px_1fr] lg:items-center">
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="absolute -left-3 -top-3 size-28 rounded-tl-2xl border-l-4 border-t-4 border-[var(--accent)]" />
             <Image
-              alt="Échange professionnel autour d'une table"
-              className="relative h-72 w-full rounded-[var(--radius-card)] object-cover sm:h-[430px]"
-              height={534}
+              alt="Professionnels réunis pour faciliter le dialogue social"
+              className="relative aspect-[4/3] w-full rounded-[var(--radius-card)] object-cover object-center"
+              height={1086}
               loading="lazy"
-              src={images.dialogue}
-              width={480}
+              sizes="(max-width: 1024px) 100vw, 420px"
+              src={images.socialDialogue}
+              width={1448}
             />
             <div className="absolute inset-x-5 bottom-5 rounded-[var(--radius-page)] bg-black/80 p-5 text-sm leading-7 text-neutral-200 backdrop-blur">
               <strong className="text-[var(--accent-light)]">Plus une tension est prise tôt,</strong>{" "}
               plus le dialogue est simple à restaurer.
             </div>
           </div>
-          <div>
+          <div className="min-w-0">
             <SectionHeading
               eyebrow="Quand intervenir"
               title="Ces situations vous parlent ?"
