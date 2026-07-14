@@ -74,7 +74,7 @@ export function ContactForm() {
 
     try {
       formData.set("form-name", "contact");
-      const response = await fetch("/", {
+      const response = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
@@ -94,7 +94,7 @@ export function ContactForm() {
 
   return (
     <form
-      action="/contact"
+      action="/__forms.html"
       className="dg-card flex flex-col gap-5 p-6 sm:p-9"
       data-netlify="true"
       data-netlify-honeypot="bot-field"
