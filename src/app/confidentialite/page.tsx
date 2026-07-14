@@ -39,6 +39,10 @@ export default function PrivacyPage() {
           la prospection automatisée.
         </p>
         <p>
+          Le traitement de ces informations est nécessaire pour répondre à une
+          demande de premier échange formulée par la personne concernée.
+        </p>
+        <p>
           Aucun paiement en ligne et aucune réservation automatique ne sont
           proposés sur le site.
         </p>

@@ -40,7 +40,7 @@ export function ContactForm() {
     const formData = new FormData(form);
     const nextErrors: Record<string, string> = {};
 
-    const requiredFields = ["lastName", "requestType", "message", "consent"];
+    const requiredFields = ["Nom", "Type de demande", "Message"];
 
     for (const field of requiredFields) {
       if (!formData.get(field)) {
@@ -48,20 +48,24 @@ export function ContactForm() {
       }
     }
 
-    const email = String(formData.get("email") ?? "");
-    const phone = String(formData.get("phone") ?? "");
+    const email = String(formData.get("E-mail") ?? "");
+    const phone = String(formData.get("Téléphone") ?? "");
     if (!email && !phone) {
-      nextErrors.email = "Indiquez au moins un email ou un téléphone.";
-      nextErrors.phone = "Indiquez au moins un email ou un téléphone.";
+      nextErrors["E-mail"] = "Indiquez au moins un email ou un téléphone.";
+      nextErrors.Téléphone = "Indiquez au moins un email ou un téléphone.";
     }
 
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      nextErrors.email = "Adresse email invalide.";
+      nextErrors["E-mail"] = "Adresse email invalide.";
     }
 
-    const message = String(formData.get("message") ?? "");
+    const message = String(formData.get("Message") ?? "");
     if (message.length > 1800) {
-      nextErrors.message = "Le message doit rester sous 1800 caractères.";
+      nextErrors.Message = "Le message doit rester sous 1800 caractères.";
+    }
+
+    if (!consentAccepted) {
+      nextErrors.privacy = "Vous devez prendre connaissance de la politique de confidentialité.";
     }
 
     setErrors(nextErrors);
@@ -73,6 +77,12 @@ export function ContactForm() {
     setStatus("sending");
 
     try {
+      for (const field of ["Prénom", "E-mail", "Téléphone", "Structure", "Fonction"]) {
+        if (!String(formData.get(field) ?? "").trim()) {
+          formData.delete(field);
+        }
+      }
+
       formData.set("form-name", "contact");
       const response = await fetch("/__forms.html", {
         method: "POST",
@@ -116,21 +126,21 @@ export function ContactForm() {
         </p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Prénom" name="firstName" optionalText="facultatif">
-          <input className={fieldClass} id="firstName" maxLength={80} name="firstName" placeholder="Votre prénom" type="text" />
+        <Field label="Prénom" name="Prénom" optionalText="facultatif">
+          <input className={fieldClass} id="Prénom" maxLength={80} name="Prénom" placeholder="Votre prénom" type="text" />
         </Field>
-        <Field error={errors.lastName} label="Nom" name="lastName" required>
-          <input aria-describedby={errors.lastName ? "lastName-error" : undefined} aria-invalid={Boolean(errors.lastName)} className={fieldClass} id="lastName" maxLength={80} name="lastName" placeholder="Votre nom" required type="text" />
+        <Field error={errors.Nom} label="Nom" name="Nom" required>
+          <input aria-describedby={errors.Nom ? "Nom-error" : undefined} aria-invalid={Boolean(errors.Nom)} className={fieldClass} id="Nom" maxLength={80} name="Nom" placeholder="Votre nom" required type="text" />
         </Field>
-        <Field error={errors.email} label="Email" name="email">
-          <input aria-describedby={errors.email ? "email-error" : undefined} aria-invalid={Boolean(errors.email)} className={fieldClass} id="email" maxLength={160} name="email" placeholder="vous@exemple.fr" type="email" />
+        <Field error={errors["E-mail"]} label="Email" name="E-mail">
+          <input aria-describedby={errors["E-mail"] ? "E-mail-error" : undefined} aria-invalid={Boolean(errors["E-mail"])} className={fieldClass} id="E-mail" maxLength={160} name="E-mail" placeholder="vous@exemple.fr" type="email" />
         </Field>
-        <Field error={errors.phone} label="Téléphone" name="phone">
-          <input aria-describedby={errors.phone ? "phone-error" : undefined} aria-invalid={Boolean(errors.phone)} className={fieldClass} id="phone" maxLength={40} name="phone" placeholder="+590 ..." type="tel" />
+        <Field error={errors.Téléphone} label="Téléphone" name="Téléphone">
+          <input aria-describedby={errors.Téléphone ? "Téléphone-error" : undefined} aria-invalid={Boolean(errors.Téléphone)} className={fieldClass} id="Téléphone" maxLength={40} name="Téléphone" placeholder="+590 ..." type="tel" />
         </Field>
       </div>
-      <Field error={errors.requestType} label="Type de demande" name="requestType" required>
-        <select aria-describedby={errors.requestType ? "requestType-error" : undefined} aria-invalid={Boolean(errors.requestType)} className={selectClass} defaultValue="" id="requestType" name="requestType" required>
+      <Field error={errors["Type de demande"]} label="Type de demande" name="Type de demande" required>
+        <select aria-describedby={errors["Type de demande"] ? "Type de demande-error" : undefined} aria-invalid={Boolean(errors["Type de demande"])} className={selectClass} defaultValue="" id="Type de demande" name="Type de demande" required>
           <option disabled value="">
             Sélectionner
           </option>
@@ -141,14 +151,14 @@ export function ContactForm() {
           ))}
         </select>
       </Field>
-      <Field error={errors.message} label="Votre situation, en quelques lignes" name="message" required>
+      <Field error={errors.Message} label="Votre situation, en quelques lignes" name="Message" required>
         <textarea
-          aria-describedby={errors.message ? "message-error" : undefined}
-          aria-invalid={Boolean(errors.message)}
+          aria-describedby={errors.Message ? "Message-error" : undefined}
+          aria-invalid={Boolean(errors.Message)}
           className={`${fieldClass} min-h-40 resize-y`}
-          id="message"
+          id="Message"
           maxLength={1800}
-          name="message"
+          name="Message"
           placeholder="Décrivez le contexte général. Inutile de transmettre des documents ou des informations sensibles à ce stade."
           required
         />
@@ -160,14 +170,14 @@ export function ContactForm() {
         </p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Structure" name="organization" optionalText="facultatif">
-          <input className={fieldClass} id="organization" maxLength={120} name="organization" placeholder="Nom de votre structure" type="text" />
+        <Field label="Structure" name="Structure" optionalText="facultatif">
+          <input className={fieldClass} id="Structure" maxLength={120} name="Structure" placeholder="Nom de votre structure" type="text" />
         </Field>
-        <Field label="Fonction" name="role" optionalText="facultatif">
-          <input className={fieldClass} id="role" maxLength={120} name="role" placeholder="Votre fonction" type="text" />
+        <Field label="Fonction" name="Fonction" optionalText="facultatif">
+          <input className={fieldClass} id="Fonction" maxLength={120} name="Fonction" placeholder="Votre fonction" type="text" />
         </Field>
-        <Field label="Service recherché" name="service" optionalText="facultatif">
-          <select className={selectClass} id="service" name="service">
+        <Field label="Service recherché" name="Service recherché" optionalText="facultatif">
+          <select className={selectClass} id="Service recherché" name="Service recherché">
             {serviceOptions.map((service) => (
               <option key={service} value={service}>
                 {service}
@@ -175,8 +185,8 @@ export function ContactForm() {
             ))}
           </select>
         </Field>
-        <Field label="Préférence de contact" name="contactPreference" optionalText="facultatif">
-          <select className={selectClass} id="contactPreference" name="contactPreference">
+        <Field label="Préférence de contact" name="Préférence de contact" optionalText="facultatif">
+          <select className={selectClass} id="Préférence de contact" name="Préférence de contact">
             {contactPreferences.map((preference) => (
               <option key={preference} value={preference}>
                 {preference}
@@ -187,20 +197,20 @@ export function ContactForm() {
       </div>
       <label className="flex cursor-pointer gap-3 text-sm leading-6 text-[var(--text-soft)]">
         <input
-          aria-describedby={errors.consent ? "consent-error" : undefined}
-          aria-invalid={Boolean(errors.consent)}
+          aria-describedby={errors.privacy ? "privacy-error" : undefined}
+          aria-invalid={Boolean(errors.privacy)}
           checked={consentAccepted}
           className="mt-1 size-5 cursor-pointer accent-[var(--accent-dark)]"
-          name="consent"
+          id="privacy"
           onChange={(event) => setConsentAccepted(event.currentTarget.checked)}
           required
           type="checkbox"
         />
         <span>
-          J'accepte que mes données soient utilisées pour traiter ma demande,
-          conformément à la politique de confidentialité.
-          {errors.consent ? (
-            <span className="block font-bold text-red-700" id="consent-error">{errors.consent}</span>
+          J'ai pris connaissance de la{" "}
+          <a className="font-bold underline" href="/confidentialite">politique de confidentialité</a>.
+          {errors.privacy ? (
+            <span className="block font-bold text-red-700" id="privacy-error">{errors.privacy}</span>
           ) : null}
         </span>
       </label>
@@ -221,8 +231,8 @@ export function ContactForm() {
       <div aria-live="polite">
         {status === "success" ? (
           <p className="rounded-[var(--radius-field)] bg-[var(--soft)] p-4 text-sm font-bold text-[var(--accent-dark)]">
-            Votre demande a été préparée pour transmission. DÉGGANTE Consulting
-            reviendra vers vous après étude.
+            Votre demande a bien été envoyée. DÉGGANTE Consulting reviendra vers
+            vous après étude.
           </p>
         ) : null}
         {status === "error" && Object.keys(errors).length === 0 ? (
