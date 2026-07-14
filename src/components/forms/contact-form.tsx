@@ -74,11 +74,16 @@ export function ContactForm() {
 
     try {
       formData.set("form-name", "contact");
-      await fetch("/", {
+      const response = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
       });
+
+      if (!response.ok) {
+        throw new Error(`Form submission failed with status ${response.status}`);
+      }
+
       form.reset();
       setConsentAccepted(false);
       setStatus("success");
@@ -91,13 +96,15 @@ export function ContactForm() {
     <form
       action="/contact"
       className="dg-card flex flex-col gap-5 p-6 sm:p-9"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
       method="POST"
       name="contact"
       noValidate
       onSubmit={handleSubmit}
     >
       <input name="form-name" type="hidden" value="contact" />
-      <p aria-hidden="true" className="hidden">
+      <p aria-hidden="true" className="sr-only">
         <label>
           Ne pas remplir ce champ <input autoComplete="off" name="bot-field" tabIndex={-1} />
         </label>

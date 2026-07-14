@@ -32,9 +32,11 @@ export default function PrivacyPage() {
       </PrivacySection>
       <PrivacySection id="traitement" title="Comment elles sont traitées">
         <p>
-          Les informations du formulaire sont transmises par email à DÉGGANTE
-          Consulting. Le site ne constitue aucune base de prospects, n'envoie
-          aucune newsletter et ne pratique aucune prospection automatisée.
+          Les informations du formulaire sont collectées via Netlify Forms et
+          conservées dans le tableau de bord Netlify pour permettre leur
+          traitement. Elles sont ensuite transmises par email à DÉGGANTE
+          Consulting. Elles ne sont pas utilisées pour une newsletter ni pour de
+          la prospection automatisée.
         </p>
         <p>
           Aucun paiement en ligne et aucune réservation automatique ne sont

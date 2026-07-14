@@ -94,10 +94,11 @@ Le fichier `netlify.toml` définit :
 
 Après connexion du dépôt dans Netlify :
 
-1. vérifier que le site build correctement ;
-2. activer les notifications du formulaire `contact` vers `contact@degganteconsulting.fr` ;
-3. connecter le domaine `degganteconsulting.fr` ;
-4. vérifier que `https://degganteconsulting.fr/sitemap.xml` et `/robots.txt` répondent.
+1. activer la détection des formulaires, puis redéployer le site ;
+2. vérifier que le site build correctement et que le formulaire `contact` apparaît dans Netlify Forms ;
+3. activer les notifications du formulaire `contact` vers `contact@degganteconsulting.fr` ;
+4. connecter le domaine `degganteconsulting.fr` ;
+5. vérifier que `https://degganteconsulting.fr/sitemap.xml` et `/robots.txt` répondent.
 
 ## Pages légales
 
