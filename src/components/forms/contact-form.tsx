@@ -48,15 +48,15 @@ export function ContactForm() {
       }
     }
 
-    const email = String(formData.get("E-mail") ?? "");
+    const email = String(formData.get("email") ?? "");
     const phone = String(formData.get("Téléphone") ?? "");
     if (!email && !phone) {
-      nextErrors["E-mail"] = "Indiquez au moins un email ou un téléphone.";
+      nextErrors.email = "Indiquez au moins un email ou un téléphone.";
       nextErrors.Téléphone = "Indiquez au moins un email ou un téléphone.";
     }
 
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      nextErrors["E-mail"] = "Adresse email invalide.";
+      nextErrors.email = "Adresse email invalide.";
     }
 
     const message = String(formData.get("Message") ?? "");
@@ -77,7 +77,7 @@ export function ContactForm() {
     setStatus("sending");
 
     try {
-      for (const field of ["Prénom", "E-mail", "Téléphone", "Structure", "Fonction"]) {
+      for (const field of ["Prénom", "email", "Téléphone", "Structure", "Fonction"]) {
         if (!String(formData.get(field) ?? "").trim()) {
           formData.delete(field);
         }
@@ -132,8 +132,8 @@ export function ContactForm() {
         <Field error={errors.Nom} label="Nom" name="Nom" required>
           <input aria-describedby={errors.Nom ? "Nom-error" : undefined} aria-invalid={Boolean(errors.Nom)} className={fieldClass} id="Nom" maxLength={80} name="Nom" placeholder="Votre nom" required type="text" />
         </Field>
-        <Field error={errors["E-mail"]} label="Email" name="E-mail">
-          <input aria-describedby={errors["E-mail"] ? "E-mail-error" : undefined} aria-invalid={Boolean(errors["E-mail"])} className={fieldClass} id="E-mail" maxLength={160} name="E-mail" placeholder="vous@exemple.fr" type="email" />
+        <Field error={errors.email} label="Email" name="email">
+          <input aria-describedby={errors.email ? "email-error" : undefined} aria-invalid={Boolean(errors.email)} className={fieldClass} id="email" maxLength={160} name="email" placeholder="vous@exemple.fr" type="email" />
         </Field>
         <Field error={errors.Téléphone} label="Téléphone" name="Téléphone">
           <input aria-describedby={errors.Téléphone ? "Téléphone-error" : undefined} aria-invalid={Boolean(errors.Téléphone)} className={fieldClass} id="Téléphone" maxLength={40} name="Téléphone" placeholder="+590 ..." type="tel" />
