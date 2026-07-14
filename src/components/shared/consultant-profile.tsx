@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ButtonLink } from "@/components/shared/button-link";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { consultant, images } from "@/content/site";
+import { portraitBlurDataUrl } from "@/lib/image-placeholders";
 
 export function ConsultantProfile({ compact = false }: Readonly<{ compact?: boolean }>) {
   return (
@@ -11,9 +12,11 @@ export function ConsultantProfile({ compact = false }: Readonly<{ compact?: bool
         <div className="absolute -bottom-3 -right-3 size-32 rounded-br-[var(--radius-card)] border-b-4 border-r-4 border-[var(--accent)]" />
         <Image
           alt="Élière Guieba travaillant sur un accompagnement en relations sociales"
+          blurDataURL={portraitBlurDataUrl}
           className="relative aspect-[3/4] w-full rounded-[var(--radius-card)] border border-[var(--card-border)] object-cover object-top"
           height={1448}
           loading="lazy"
+          placeholder="blur"
           sizes="(max-width: 1024px) 100vw, 400px"
           src={images.consultantPortrait}
           width={1086}

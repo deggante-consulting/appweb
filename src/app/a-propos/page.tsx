@@ -6,6 +6,7 @@ import { ButtonLink } from "@/components/shared/button-link";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { ValuesGrid } from "@/components/shared/values-grid";
 import { consultant, images, timeline, zones } from "@/content/site";
+import { portraitBlurDataUrl } from "@/lib/image-placeholders";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata("/a-propos");
@@ -19,8 +20,10 @@ export default function AboutPage() {
             <div className="absolute -left-3 -top-3 size-28 rounded-tl-[var(--radius-card)] border-l-4 border-t-4 border-[var(--accent)]" />
             <Image
               alt="Élière Guieba, fondateur de DÉGGANTE Consulting"
+              blurDataURL={portraitBlurDataUrl}
               className="relative aspect-[4/5] w-full rounded-[var(--radius-card)] border border-[var(--card-border)] object-cover object-top"
               height={1402}
+              placeholder="blur"
               priority
               sizes="(max-width: 1024px) 100vw, 420px"
               src={images.consultantAboutPortrait}
