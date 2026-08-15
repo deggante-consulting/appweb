@@ -398,21 +398,25 @@ img {
     transition: none !important;
   }
 
-  /* Interactif ou purement décoratif : sans objet sur papier. */
-  .skip-link,
-  header,
-  footer,
-  nav,
-  form,
-  .dg-cta,
-  .dg-draw,
-  .dg-draw-pending,
-  aside:has(nav),
-  #menu-mobile,
+  /* Interactif ou purement décoratif : sans objet sur papier.
+
+     Comme le bloc ci-dessus, ces règles excluent la plaquette : elle a
+     son propre en-tête de document (`.pl-head`, un `<header>`), que le
+     sélecteur `header` faisait autrement disparaître du papier. */
+  body:not(:has(.pl-doc)) .skip-link,
+  body:not(:has(.pl-doc)) header,
+  body:not(:has(.pl-doc)) footer,
+  body:not(:has(.pl-doc)) nav,
+  body:not(:has(.pl-doc)) form,
+  body:not(:has(.pl-doc)) .dg-cta,
+  body:not(:has(.pl-doc)) .dg-draw,
+  body:not(:has(.pl-doc)) .dg-draw-pending,
+  body:not(:has(.pl-doc)) aside:has(nav),
+  body:not(:has(.pl-doc)) #menu-mobile,
   /* Décors : photos de fond des bandeaux, dégradés et angles graphiques,
      tous rendus par des éléments vides ou marqués aria-hidden. */
-  img[aria-hidden="true"],
-  main div:empty {
+  body:not(:has(.pl-doc)) img[aria-hidden="true"],
+  body:not(:has(.pl-doc)) main div:empty {
     display: none !important;
   }
 
@@ -472,7 +476,7 @@ img {
      absolu que les encarts de texte posés sur une photo, qui doivent
      repasser dans le flux pour rester lisibles en noir sur blanc. */
   aside,
-  main div {
+  body:not(:has(.pl-doc)) main div {
     position: static !important;
   }
 
