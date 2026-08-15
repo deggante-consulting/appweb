@@ -90,7 +90,6 @@ export default function ServicesPage() {
               key={service.id}
             >
               <Reveal className={index % 2 ? "dg-container grid gap-10 lg:grid-cols-[360px_1fr] lg:items-start" : "dg-container grid gap-10 lg:grid-cols-[1fr_360px] lg:items-start"}>
-                {index % 2 ? <ServiceImage dark={dark} image={image} result={service.result} /> : null}
                 <div className="flex flex-col gap-5">
                   <div className="flex items-center gap-4">
                     <ServiceIcon id={service.id} size="sm" />
@@ -119,7 +118,15 @@ export default function ServicesPage() {
                     {service.cta}
                   </ButtonLink>
                 </div>
-                {index % 2 ? null : <ServiceImage dark={dark} image={image} result={service.result} />}
+                {/* Le texte précède toujours l'image dans le DOM : en une
+                    seule colonne, l'image doit suivre son titre. Sur grand
+                    écran, `order` la ramène à gauche une section sur deux. */}
+                <ServiceImage
+                  className={index % 2 ? "lg:order-first" : undefined}
+                  dark={dark}
+                  image={image}
+                  result={service.result}
+                />
               </Reveal>
             </article>
           );
@@ -140,16 +147,18 @@ export default function ServicesPage() {
 }
 
 function ServiceImage({
+  className = "",
   dark,
   image,
   result,
 }: Readonly<{
+  className?: string;
   dark: boolean;
   image: { alt: string; height: number; src: string; width: number };
   result: string;
 }>) {
   return (
-    <div className="grid gap-4">
+    <div className={`grid gap-4 ${className}`}>
       <Image
         alt={image.alt}
         className="aspect-[4/3] w-full rounded-[var(--radius-card)] object-cover object-center"

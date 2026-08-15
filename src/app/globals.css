@@ -346,3 +346,185 @@ img {
     width: min(100% - 7rem, 1328px);
   }
 }
+
+/* ------------------------------------------------------------------
+   Impression et export PDF
+
+   Le navigateur reprend cette feuille aussi bien pour « Imprimer » que
+   pour « Enregistrer en PDF ». L'habillage écran (navigation, CTA,
+   décors, formulaire) disparaît, le contenu passe en noir sur blanc.
+   ------------------------------------------------------------------ */
+
+.dg-print-only {
+  display: none;
+}
+
+@page {
+  size: A4;
+  margin: 14mm 12mm;
+}
+
+@media print {
+  /* Aplatit fonds sombres, cartes et ombres. Les bordures réellement
+     utiles sont réintroduites plus bas, en gris clair.
+
+     `body:not(:has(.pl-doc))` met la plaquette (/plaquette) hors de
+     portée : c'est un document mis en page pour le papier, pas une page
+     du site à dépouiller de son habillage. */
+  body:not(:has(.pl-doc)) *,
+  body:not(:has(.pl-doc)) *::before,
+  body:not(:has(.pl-doc)) *::after {
+    background: transparent !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    font-size: 11pt;
+  }
+
+  /* Sans ça, tout bloc jamais atteint par le scroll reste à
+     opacity: 0 et s'imprime blanc. */
+  .dg-reveal,
+  .dg-reveal-visible,
+  .dg-fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Interactif ou purement décoratif : sans objet sur papier. */
+  .skip-link,
+  header,
+  footer,
+  nav,
+  form,
+  .dg-cta,
+  .dg-draw,
+  .dg-draw-pending,
+  aside:has(nav),
+  #menu-mobile,
+  /* Décors : photos de fond des bandeaux, dégradés et angles graphiques,
+     tous rendus par des éléments vides ou marqués aria-hidden. */
+  img[aria-hidden="true"],
+  main div:empty {
+    display: none !important;
+  }
+
+  .dg-print-only {
+    display: block !important;
+  }
+
+  .dg-print-masthead {
+    display: flex !important;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 4mm;
+    margin-bottom: 6mm;
+  }
+
+  .dg-print-identity {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+
+  .dg-print-identity span {
+    font-size: 9pt;
+    font-style: italic;
+  }
+
+  .dg-print-url {
+    margin-left: auto;
+    font-size: 9pt;
+  }
+
+  .dg-print-contact {
+    border-top: 1px solid #cccccc;
+    padding-top: 4mm;
+    margin-top: 8mm;
+    font-size: 9pt;
+    line-height: 1.6;
+    break-inside: avoid;
+  }
+
+  /* Le contenu est déjà en une colonne à cette largeur de page : il
+     reste à resserrer les rythmes verticaux pensés pour l'écran. */
+  body:not(:has(.pl-doc)) main section {
+    padding-block: 0 !important;
+    margin-bottom: 8mm !important;
+  }
+
+  body:not(:has(.pl-doc)) main,
+  body:not(:has(.pl-doc)) main section,
+  body:not(:has(.pl-doc)) main div,
+  aside {
+    overflow: visible !important;
+  }
+
+  /* Les décors positionnés sont masqués juste au-dessus : ne restent en
+     absolu que les encarts de texte posés sur une photo, qui doivent
+     repasser dans le flux pour rester lisibles en noir sur blanc. */
+  aside,
+  main div {
+    position: static !important;
+  }
+
+  /* Le bandeau d'accueil vise la hauteur de l'écran : sur papier, ça
+     réserverait une page entière. */
+  main .dg-container {
+    min-height: 0 !important;
+  }
+
+  .dg-card,
+  .dg-print-masthead {
+    border-color: #cccccc !important;
+  }
+
+  /* Le premier repère des étapes est un disque plein : privé de son
+     fond, il perdait son cercle alors que les suivants gardent le leur. */
+  main span[class*="rounded-full"] {
+    border: 1.5px solid #000000 !important;
+  }
+
+  /* Un titre ne doit jamais finir seul en bas de page. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+    break-inside: avoid;
+  }
+
+  li,
+  img,
+  figure,
+  blockquote,
+  .dg-card {
+    break-inside: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Les photos sont réglées pour le plein écran : sans plafond, le
+     portrait 3/4 dépasse la hauteur d'une page A4. */
+  body:not(:has(.pl-doc)) img {
+    max-width: 100% !important;
+    max-height: 80mm !important;
+    object-fit: cover;
+  }
+
+  .dg-print-masthead img {
+    max-height: 12mm !important;
+  }
+}

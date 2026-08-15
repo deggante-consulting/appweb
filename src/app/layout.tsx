@@ -4,6 +4,10 @@ import "./globals.css";
 
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import {
+  PrintContactBlock,
+  PrintMasthead,
+} from "@/components/layout/print-identity";
 import { organizationJsonLd, site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -58,7 +62,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           Aller au contenu
         </a>
         <Header />
+        <PrintMasthead />
         <main id="contenu">{children}</main>
+        <PrintContactBlock />
         <Footer />
         <script
           type="application/ld+json"

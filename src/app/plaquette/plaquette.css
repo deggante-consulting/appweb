@@ -1,0 +1,557 @@
+/* ------------------------------------------------------------------
+   Plaquette DÉGGANTE — document A4 de 4 pages
+
+   Contrairement à la feuille d'impression du site (globals.css), le
+   contenu ne coule pas librement : chaque page est un bloc de hauteur
+   fixe, ce qui garantit un document identique à l'écran, à l'impression
+   et à l'export PDF.
+   ------------------------------------------------------------------ */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+/* La plaquette est un document autonome : l'habillage du site n'a pas
+   sa place autour. */
+body:has(.pl-doc) > header,
+body:has(.pl-doc) > footer,
+body:has(.pl-doc) > .dg-print-only,
+body:has(.pl-doc) .skip-link {
+  display: none !important;
+}
+
+body:has(.pl-doc) {
+  background: #55554f;
+}
+
+.pl-doc {
+  --pl-dark: #0d0d0d;
+  --pl-accent: #36b24a;
+  --pl-accent-dark: #1e7a2e;
+  --pl-accent-light: #7bd98a;
+  --pl-paper: #f6f6f1;
+  --pl-text: #26261f;
+  --pl-soft: #55554f;
+  --pl-line: #ddddd5;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8mm;
+  padding: 8mm 0;
+  color: var(--pl-text);
+  font-size: 10pt;
+  line-height: 1.55;
+}
+
+.pl-page {
+  position: relative;
+  width: 210mm;
+  min-height: 297mm;
+  max-height: 297mm;
+  overflow: hidden;
+  padding: 15mm 16mm;
+  background: #ffffff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+
+.pl-page-dark {
+  background: var(--pl-dark);
+  color: #ffffff;
+}
+
+/* `:where()` maintient ce reset à specificité nulle : sans lui, il
+   l'emporterait sur les marges des classes définies plus bas. */
+.pl-doc :where(h1, h2, h3, p, ul, ol, blockquote) {
+  margin: 0;
+}
+
+.pl-doc :where(ul) {
+  padding: 0;
+  list-style: none;
+}
+
+/* --- Repères de lecture ------------------------------------------- */
+
+.pl-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  font-size: 7.5pt;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pl-accent-dark);
+}
+
+.pl-eyebrow::before {
+  content: "";
+  width: 7mm;
+  height: 1.4px;
+  background: var(--pl-accent);
+}
+
+.pl-page-dark .pl-eyebrow {
+  color: var(--pl-accent-light);
+}
+
+.pl-title {
+  margin-top: 3mm;
+  font-size: 20pt;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--pl-dark);
+}
+
+.pl-page-dark .pl-title {
+  color: #ffffff;
+}
+
+.pl-lead {
+  margin-top: 3mm;
+  font-size: 10.5pt;
+  line-height: 1.65;
+  color: var(--pl-soft);
+}
+
+/* --- Page 1 : couverture ------------------------------------------ */
+
+.pl-cover {
+  display: flex;
+  flex-direction: column;
+  height: 267mm;
+}
+
+.pl-brand {
+  display: flex;
+  align-items: center;
+  gap: 4mm;
+}
+
+.pl-brand img {
+  width: 16mm;
+  height: 16mm;
+  border-radius: 50%;
+}
+
+.pl-brand-name {
+  font-size: 15pt;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--pl-accent);
+}
+
+.pl-brand-sub {
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: #c9c9c2;
+}
+
+.pl-cover-claim {
+  margin-top: 16mm;
+  font-size: 34pt;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.pl-cover-claim span {
+  color: var(--pl-accent);
+}
+
+.pl-cover-lead {
+  margin-top: 6mm;
+  max-width: 145mm;
+  font-size: 11pt;
+  line-height: 1.7;
+  color: #d5d5cd;
+}
+
+/* La photo absorbe l'espace restant : la couverture reste calée en haut
+   et en bas quelle que soit la longueur du texte d'accroche. */
+.pl-cover-photo {
+  margin-top: 10mm;
+  width: 100%;
+  flex: 1 1 62mm;
+  min-height: 62mm;
+  object-fit: cover;
+  object-position: 70% center;
+  border-radius: 3mm;
+}
+
+.pl-cover-foot {
+  margin-top: auto;
+  padding-top: 6mm;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6mm;
+  align-items: end;
+}
+
+.pl-cover-audiences {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2mm;
+}
+
+.pl-chip {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  padding: 1.4mm 3.4mm;
+  font-size: 8pt;
+  font-weight: 700;
+  color: #e6e6df;
+}
+
+.pl-cover-contact {
+  text-align: right;
+  font-size: 8.5pt;
+  line-height: 1.7;
+  color: #c9c9c2;
+}
+
+.pl-cover-contact strong {
+  display: block;
+  color: #ffffff;
+}
+
+/* --- Page 2 : le consultant --------------------------------------- */
+
+.pl-profile {
+  display: grid;
+  grid-template-columns: 62mm 1fr;
+  gap: 8mm;
+  margin-top: 8mm;
+  align-items: start;
+}
+
+.pl-profile img {
+  width: 100%;
+  height: 78mm;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 3mm;
+  border: 1px solid var(--pl-line);
+}
+
+.pl-profile-name {
+  font-size: 15pt;
+  font-weight: 800;
+  color: var(--pl-dark);
+}
+
+.pl-profile-role {
+  margin-top: 1mm;
+  font-size: 9.5pt;
+  font-weight: 700;
+  color: var(--pl-accent-dark);
+}
+
+.pl-profile p + p {
+  margin-top: 3mm;
+}
+
+.pl-quote {
+  margin-top: 6mm;
+  border-left: 3px solid var(--pl-accent);
+  padding: 1mm 0 1mm 5mm;
+  font-size: 11pt;
+  font-weight: 800;
+  line-height: 1.5;
+  color: var(--pl-accent-dark);
+}
+
+.pl-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5mm;
+  margin-top: 12mm;
+  padding-top: 8mm;
+  border-top: 1px solid var(--pl-line);
+}
+
+.pl-timeline-date {
+  font-size: 9.5pt;
+  font-weight: 800;
+  color: var(--pl-dark);
+}
+
+.pl-timeline-date::before {
+  content: "";
+  display: block;
+  width: 3mm;
+  height: 3mm;
+  margin-bottom: 2.5mm;
+  border-radius: 50%;
+  border: 1.5px solid var(--pl-accent);
+}
+
+.pl-timeline p {
+  margin-top: 1.5mm;
+  font-size: 8.5pt;
+  line-height: 1.5;
+  color: var(--pl-soft);
+}
+
+.pl-reasons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm 8mm;
+  margin-top: 6mm;
+}
+
+.pl-reason h3 {
+  font-size: 9.5pt;
+  font-weight: 800;
+  color: var(--pl-dark);
+}
+
+.pl-reason p {
+  margin-top: 1mm;
+  font-size: 8.5pt;
+  line-height: 1.5;
+  color: var(--pl-soft);
+}
+
+/* --- Page 3 : domaines d'intervention ------------------------------ */
+
+.pl-services {
+  display: grid;
+  gap: 4mm;
+  margin-top: 5mm;
+}
+
+.pl-service {
+  border: 1px solid var(--pl-line);
+  border-radius: 3mm;
+  padding: 4mm 5mm;
+}
+
+.pl-service-head {
+  display: flex;
+  align-items: baseline;
+  gap: 3mm;
+}
+
+.pl-service-number {
+  font-size: 9pt;
+  font-weight: 800;
+  color: var(--pl-accent-dark);
+}
+
+.pl-service-head h3 {
+  font-size: 12pt;
+  font-weight: 800;
+  color: var(--pl-dark);
+}
+
+.pl-service > p {
+  margin-top: 1.5mm;
+  font-size: 9pt;
+  line-height: 1.55;
+  color: var(--pl-soft);
+}
+
+.pl-service ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2mm 6mm;
+  margin-top: 2.5mm;
+}
+
+.pl-service li {
+  position: relative;
+  padding-left: 4mm;
+  font-size: 8.5pt;
+  line-height: 1.4;
+}
+
+.pl-service li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.6mm;
+  width: 1.6mm;
+  height: 1.6mm;
+  background: var(--pl-accent);
+  transform: rotate(45deg);
+}
+
+.pl-service-result {
+  margin-top: 2.5mm;
+  padding-top: 2mm;
+  border-top: 1px solid var(--pl-line);
+  font-size: 8.5pt;
+  font-style: italic;
+  color: var(--pl-accent-dark);
+}
+
+/* --- Page 4 : salariés, déroulé, contact --------------------------- */
+
+.pl-split {
+  margin-top: 7mm;
+  padding: 5mm 6mm;
+  border: 1px solid var(--pl-line);
+  border-left: 3px solid var(--pl-accent);
+  border-radius: 3mm;
+  background: var(--pl-paper);
+}
+
+.pl-split h2 {
+  font-size: 12pt;
+  font-weight: 800;
+  color: var(--pl-dark);
+}
+
+.pl-split > p {
+  margin-top: 2mm;
+  font-size: 9pt;
+  line-height: 1.6;
+  color: var(--pl-soft);
+}
+
+.pl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2mm;
+  margin-top: 3mm;
+}
+
+.pl-tag {
+  border: 1px solid var(--pl-line);
+  border-radius: 999px;
+  padding: 1.2mm 3.2mm;
+  background: #ffffff;
+  font-size: 8pt;
+  font-weight: 700;
+  color: var(--pl-text);
+}
+
+.pl-limits {
+  margin-top: 3mm;
+  font-size: 8.5pt;
+  line-height: 1.55;
+  color: var(--pl-soft);
+}
+
+.pl-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4mm;
+  margin-top: 6mm;
+}
+
+.pl-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8mm;
+  height: 8mm;
+  margin-bottom: 2.5mm;
+  border: 1.5px solid var(--pl-accent);
+  border-radius: 50%;
+  font-size: 9pt;
+  font-weight: 800;
+  color: var(--pl-accent-dark);
+}
+
+.pl-step h3 {
+  font-size: 9.5pt;
+  font-weight: 800;
+  color: var(--pl-dark);
+}
+
+.pl-step p {
+  margin-top: 1mm;
+  font-size: 8.5pt;
+  line-height: 1.5;
+  color: var(--pl-soft);
+}
+
+.pl-values {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5mm;
+  margin-top: 7mm;
+  padding-top: 6mm;
+  border-top: 1px solid var(--pl-line);
+}
+
+.pl-value-word {
+  font-size: 11pt;
+  font-weight: 800;
+  color: var(--pl-accent-dark);
+}
+
+.pl-value p {
+  margin-top: 1mm;
+  font-size: 8.5pt;
+  line-height: 1.5;
+  color: var(--pl-soft);
+}
+
+.pl-contact {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6mm;
+  padding: 6mm;
+  border-radius: 3mm;
+  background: var(--pl-dark);
+  color: #ffffff;
+}
+
+.pl-contact-label {
+  font-size: 7.5pt;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pl-accent-light);
+}
+
+.pl-contact p {
+  margin-top: 1.5mm;
+  font-size: 9pt;
+  line-height: 1.6;
+  color: #e6e6df;
+}
+
+.pl-page-4 {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Rendu papier -------------------------------------------------- */
+
+@media print {
+  body:has(.pl-doc) {
+    background: #ffffff;
+  }
+
+  .pl-doc {
+    gap: 0;
+    padding: 0;
+  }
+
+  .pl-page {
+    box-shadow: none;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .pl-page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  /* Les aplats sombres et les repères colorés font partie du document :
+     ils ne doivent pas être supprimés par l'économie d'encre. */
+  .pl-doc,
+  .pl-doc * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
